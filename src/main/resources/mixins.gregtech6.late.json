@@ -15,7 +15,8 @@
     "MixinScanManager",
     "MixinThaumcraftCraftingManager",
     "MixinMultipartProxyServerImpl",
-    "MixinTechnomancyLoadFix"
+    "MixinTechnomancyLoadFix",
+    "MixinModAndClassUtil"
   ],
   "client": [
   ],

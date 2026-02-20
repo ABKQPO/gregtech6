@@ -4417,7 +4417,7 @@ public class MT {
             .heat(CS.C, CS.C + 100)
             .setDensity(1.0)
             .setLocal("Distilled Water"),
-        H2O2 = lquddcmp(9809, "Hydrogen Peroxide", 20, 20, 255, 255, LIQUID).uumMcfg(0, H, 2 * U, O, 2 * U)
+        H2O2 = lquddcmp(9809, "Hydrogen Peroxide GT6", 20, 20, 255, 255, LIQUID).uumMcfg(0, H, 2 * U, O, 2 * U)
             .aspects(TC.AQUA, 3)
             .setDensity(1.0)
             .heat(CS.C, CS.C + 150),

@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
 import gregtech.api.enchants.EnchantmentEnderDamage;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -78,7 +79,7 @@ import twilightforest.entity.boss.EntityTFLich;
 
 public class Behavior_Gun extends AbstractBehaviorDefault {
 
-    public static EnchantmentDamage EnderDamage = Loader.isModLoaded("gregtech_nh") ? EnchantmentEnderDamage.INSTANCE : Enchantment_EnderDamage.INSTANCE;
+    public static EnchantmentDamage EnderDamage = Loader.isModLoaded("gregtech_nh") ? getEnderDamage() : Enchantment_EnderDamage.INSTANCE;
 
     public static Behavior_Gun BULLETS_SMALL = new Behavior_Gun(TD.Projectiles.BULLET_SMALL, 1.00F, 10000, 16);
     public static Behavior_Gun BULLETS_MEDIUM = new Behavior_Gun(TD.Projectiles.BULLET_MEDIUM, 2.00F, 17500, 8);
@@ -94,6 +95,11 @@ public class Behavior_Gun extends AbstractBehaviorDefault {
         mMagic = aMagic;
         mPower = aPower;
         mAmmoPerMag = UT.Code.bindStack(aAmmoPerMag);
+    }
+
+    @Optional.Method(modid = "gregtech_nh")
+    public static EnchantmentDamage getEnderDamage() {
+        return EnchantmentEnderDamage.INSTANCE;
     }
 
     public boolean shoot(ItemStack aGun, ItemStack aBullet, EntityPlayer aPlayer) {

@@ -26,10 +26,25 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
 
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
 import gregtech.api.enchants.EnchantmentRadioactivity;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -2861,8 +2876,8 @@ public class UT {
         /** Why the fuck do neither Java nor Guava have a Function to do this? */
         @SuppressWarnings("rawtypes")
         public static <X, Y extends Comparable> LinkedHashMap<X, Y> sortByValuesAcending(Map<X, Y> aMap) {
-            List<Map.Entry<X, Y>> tEntrySet = new LinkedList<>(aMap.entrySet());
-            Collections.sort(tEntrySet, new Comparator<Map.Entry<X, Y>>() {
+            List<Entry<X, Y>> tEntrySet = new LinkedList<>(aMap.entrySet());
+            Collections.sort(tEntrySet, new Comparator<Entry<X, Y>>() {
 
                 @SuppressWarnings("unchecked")
                 @Override
@@ -4936,7 +4951,12 @@ public class UT {
 
     public static class Entities {
 
-        public static EnchantmentDamage Radioactivity = Loader.isModLoaded("gregtech_nh") ? EnchantmentRadioactivity.INSTANCE : Enchantment_Radioactivity.INSTANCE;
+        public static EnchantmentDamage Radioactivity = Loader.isModLoaded("gregtech_nh") ? getRadioactivity(): Enchantment_Radioactivity.INSTANCE;
+
+        @Optional.Method(modid = "gregtech_nh")
+        public static EnchantmentDamage getRadioactivity() {
+            return EnchantmentRadioactivity.INSTANCE;
+        }
 
         /** Sends Messages to a Player */
         public static void sendchat(Object aPlayer, String... aChatMessages) {
@@ -6433,7 +6453,7 @@ public class UT {
             || aRecipeList.isEmpty()) return F;
         boolean rReturn = F;
         @SuppressWarnings("unchecked")
-        Iterator<Map.Entry<IRecipeInput, RecipeOutput>> tIterator = aRecipeList.entrySet()
+        Iterator<Entry<IRecipeInput, RecipeOutput>> tIterator = aRecipeList.entrySet()
             .iterator();
         aOutput = OM.get_(aOutput);
         while (tIterator.hasNext()) {

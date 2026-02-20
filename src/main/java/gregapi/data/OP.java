@@ -1093,7 +1093,7 @@ public class OP {
             .setCondition(REACTS_WITH_GLASS.NOT)
             .add(UNIFICATABLE, IS_CONTAINER, SELF_REFERENCING, RECYCLABLE, SCANNABLE, TOOLTIP_MATERIAL)
             .setMinStacksize(64),
-        cell = create("cell", "Cells", "", " Cell")
+        cell = create("cellGT6", "CellsGT6", "", " GT6 Cell")
             .setCondition(new Or(CONTAINERS, EMPTY, CONTAINERS_FLUID, CONTAINERS_GAS))
             .add(UNIFICATABLE, IS_CONTAINER, SELF_REFERENCING, MATERIAL_BASED, RECYCLABLE)
             .setMinStacksize(16), // Regular Gas/Fluid Cell. Introduced by Calclavia
