@@ -1,10 +1,11 @@
 package gregtech6.mixins.late;
 
-import com.glodblock.github.util.ModAndClassUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.glodblock.github.util.ModAndClassUtil;
 
 @Mixin(value = ModAndClassUtil.class, remap = false)
 public class MixinModAndClassUtil {

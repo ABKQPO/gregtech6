@@ -43,9 +43,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Optional;
-import gregtech.api.enchants.EnchantmentRadioactivity;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
@@ -80,6 +77,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -104,6 +103,7 @@ import gregapi.random.IHasWorldAndCoords;
 import gregapi.recipes.Recipe.RecipeMap;
 import gregapi.render.IIconContainer;
 import gregapi.tileentity.delegate.DelegatorTileEntity;
+import gregtech.api.enchants.EnchantmentRadioactivity;
 import ic2.api.recipe.IMachineRecipeManager;
 import ic2.api.recipe.IMachineRecipeManagerExt;
 import ic2.api.recipe.IRecipeInput;
@@ -4951,7 +4951,8 @@ public class UT {
 
     public static class Entities {
 
-        public static EnchantmentDamage Radioactivity = Loader.isModLoaded("gregtech_nh") ? getRadioactivity(): Enchantment_Radioactivity.INSTANCE;
+        public static EnchantmentDamage Radioactivity = Loader.isModLoaded("gregtech_nh") ? getRadioactivity()
+            : Enchantment_Radioactivity.INSTANCE;
 
         @Optional.Method(modid = "gregtech_nh")
         public static EnchantmentDamage getRadioactivity() {
@@ -5149,9 +5150,7 @@ public class UT {
                     if (tEnchantment.mObject instanceof Enchantment_Radioactivity)
                         rLevel = Math.max(rLevel, tEnchantment.mAmount);
             }
-            rLevel = Math.max(
-                rLevel,
-                EnchantmentHelper.getEnchantmentLevel(Radioactivity.effectId, aStack));
+            rLevel = Math.max(rLevel, EnchantmentHelper.getEnchantmentLevel(Radioactivity.effectId, aStack));
             return Code.bindInt(rLevel);
         }
 

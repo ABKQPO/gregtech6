@@ -24,9 +24,6 @@ import static gregapi.data.CS.*;
 import java.util.List;
 import java.util.UUID;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Optional;
-import gregtech.api.enchants.EnchantmentEnderDamage;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
@@ -56,6 +53,8 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 
 import com.mojang.authlib.GameProfile;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
 import gregapi.block.misc.BlockBaseBars;
 import gregapi.block.misc.BlockBaseSpike;
 import gregapi.code.ArrayListNoNulls;
@@ -74,12 +73,14 @@ import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
 import gregapi.util.WD;
+import gregtech.api.enchants.EnchantmentEnderDamage;
 import gregtech6.tileentity.misc.MultiTileEntityGregOLantern;
 import twilightforest.entity.boss.EntityTFLich;
 
 public class Behavior_Gun extends AbstractBehaviorDefault {
 
-    public static EnchantmentDamage EnderDamage = Loader.isModLoaded("gregtech_nh") ? getEnderDamage() : Enchantment_EnderDamage.INSTANCE;
+    public static EnchantmentDamage EnderDamage = Loader.isModLoaded("gregtech_nh") ? getEnderDamage()
+        : Enchantment_EnderDamage.INSTANCE;
 
     public static Behavior_Gun BULLETS_SMALL = new Behavior_Gun(TD.Projectiles.BULLET_SMALL, 1.00F, 10000, 16);
     public static Behavior_Gun BULLETS_MEDIUM = new Behavior_Gun(TD.Projectiles.BULLET_MEDIUM, 2.00F, 17500, 8);
@@ -351,9 +352,7 @@ public class Behavior_Gun extends AbstractBehaviorDefault {
                 tSpeedFactor = Math.min(2.0F, aPower / 5000.0F),
                 tMagicDamage = (aTarget instanceof EntityLivingBase
                     ? EnchantmentHelper.func_152377_a(aBullet, ((EntityLivingBase) aTarget).getCreatureAttribute())
-                    : aTarget instanceof EntityDragonPart
-                        ? UT.NBT.getEnchantmentLevel(EnderDamage, aBullet)
-                        : 0),
+                    : aTarget instanceof EntityDragonPart ? UT.NBT.getEnchantmentLevel(EnderDamage, aBullet) : 0),
                 tDamage = tSpeedFactor * Math.max(0, tGunMat.mToolQuality * 0.5F + tMassFactor);
             int tImplosion = UT.NBT.getEnchantmentLevelImplosion(aBullet),
                 tFireDamage = 4 * (UT.NBT.getEnchantmentLevel(Enchantment.flame, aGun)
