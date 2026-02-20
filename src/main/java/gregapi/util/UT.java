@@ -29,9 +29,12 @@ import java.text.DateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 
+import cpw.mods.fml.common.Loader;
+import gregtech.api.enchants.EnchantmentRadioactivity;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentDamage;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -4933,6 +4936,8 @@ public class UT {
 
     public static class Entities {
 
+        public static EnchantmentDamage Radioactivity = Loader.isModLoaded("gregtech_nh") ? EnchantmentRadioactivity.INSTANCE : Enchantment_Radioactivity.INSTANCE;
+
         /** Sends Messages to a Player */
         public static void sendchat(Object aPlayer, String... aChatMessages) {
             if (aPlayer instanceof EntityPlayerMP) for (String aMessage : aChatMessages)
@@ -5126,7 +5131,7 @@ public class UT {
             }
             rLevel = Math.max(
                 rLevel,
-                EnchantmentHelper.getEnchantmentLevel(Enchantment_Radioactivity.INSTANCE.effectId, aStack));
+                EnchantmentHelper.getEnchantmentLevel(Radioactivity.effectId, aStack));
             return Code.bindInt(rLevel);
         }
 

@@ -39,7 +39,7 @@ public class Enchantment_EnderDamage extends EnchantmentDamage {
     public static Enchantment_EnderDamage INSTANCE;
 
     public Enchantment_EnderDamage() {
-        super(Config.addIDConfig(ConfigCategories.IDs.enchantments, "Disjunction", 19), 2, -1);
+        super(Config.addIDConfig(ConfigCategories.IDs.enchantments, "Disjunction", 17), 2, -1);
         LH.add(getName(), "Disjunction");
         MT.Hg.addEnchantmentForDamage(this, 3);
         MT.Ag.addEnchantmentForDamage(this, 4);

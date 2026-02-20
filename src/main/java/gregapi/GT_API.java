@@ -71,8 +71,6 @@ import gregapi.data.*;
 import gregapi.dummies.DummyWorld;
 import gregapi.enchants.Enchantment_EnderDamage;
 import gregapi.enchants.Enchantment_Radioactivity;
-import gregapi.enchants.Enchantment_SlimeDamage;
-import gregapi.enchants.Enchantment_WerewolfDamage;
 import gregapi.item.ItemEmptySlot;
 import gregapi.item.ItemFluidDisplay;
 import gregapi.item.ItemIntegratedCircuit;
@@ -1613,10 +1611,8 @@ public class GT_API extends Abstract_Mod {
         EntityRegistry
             .registerModEntity(PrefixBlockFallingEntity.class, "gt.MetaBlockFallingEntity", 0, this, 160, 1, T);
         // Initialise Enchantments.
-        new Enchantment_WerewolfDamage();
-        new Enchantment_EnderDamage();
-        new Enchantment_Radioactivity();
-        new Enchantment_SlimeDamage();
+        if (!Loader.isModLoaded("gregtech_nh")) new Enchantment_EnderDamage();
+        if (!Loader.isModLoaded("gregtech_nh")) new Enchantment_Radioactivity();
         // Initialises the Fluid Display Item.
         IL.Display_Fluid.set(new ItemFluidDisplay());
         // Initialises the Integrated Circuit Item.

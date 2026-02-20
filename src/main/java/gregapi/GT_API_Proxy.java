@@ -114,7 +114,6 @@ import gregapi.code.ArrayListNoNulls;
 import gregapi.code.HashSetNoNulls;
 import gregapi.code.ItemStackContainer;
 import gregapi.data.*;
-import gregapi.enchants.Enchantment_WerewolfDamage;
 import gregapi.item.IItemNoGTOverride;
 import gregapi.item.IItemProjectile;
 import gregapi.item.IItemProjectile.EntityProjectile;
@@ -1153,19 +1152,6 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
                                                 break;
                                         }
                                     }
-                                } else if ("Bear989jr".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
-                                    ST.give(
-                                        tPlayer,
-                                        UT.NBT.addEnchantment(
-                                            ST.make(Items.cookie, 1, 0, "Jr. Cookie"),
-                                            Enchantment_WerewolfDamage.INSTANCE,
-                                            1),
-                                        F);
-                                    UT.Entities.chat(
-                                        tPlayer,
-                                        new ChatComponentText(
-                                            CHAT_GREG
-                                                + "Have a Jr. Cookie. Please tell Fatass to clean his Inventory, or smack him with it."));
                                 } else if ("CrazyJ1984".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
                                     ItemStack tArrow = ST.update(OP.arrowGtWood.mat(MT.Craponite, 1), aEvent.player);
                                     if (ST.valid(tArrow)) {
