@@ -39,7 +39,7 @@ public class Enchantment_SlimeDamage extends EnchantmentDamage {
     public static Enchantment_SlimeDamage INSTANCE;
 
     public Enchantment_SlimeDamage() {
-        super(Config.addIDConfig(ConfigCategories.IDs.enchantments, "Dissolving", 13), 2, -1);
+        super(Config.addIDConfig(ConfigCategories.IDs.enchantments, "Dissolving", 17), 2, -1);
         LH.add(getName(), "Dissolving");
         MT.KCl.addEnchantmentForDamage(this, 2);
         MT.KIO3.addEnchantmentForDamage(this, 3);

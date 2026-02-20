@@ -46,7 +46,7 @@ public class Enchantment_WerewolfDamage extends EnchantmentDamage {
     public static Enchantment_WerewolfDamage INSTANCE;
 
     public Enchantment_WerewolfDamage() {
-        super(Config.addIDConfig(ConfigCategories.IDs.enchantments, "Werebane", 12), 2, -1);
+        super(Config.addIDConfig(ConfigCategories.IDs.enchantments, "Werebane", 20), 2, -1);
         LH.add(getName(), "Werebane");
         MT.Ir.addEnchantmentForDamage(this, 6);
         MT.Osmiridium.addEnchantmentForDamage(this, 6);

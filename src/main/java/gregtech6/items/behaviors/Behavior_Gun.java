@@ -24,9 +24,12 @@ import static gregapi.data.CS.*;
 import java.util.List;
 import java.util.UUID;
 
+import cpw.mods.fml.common.Loader;
+import gregtech.api.enchants.EnchantmentEnderDamage;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentDamage;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -74,6 +77,8 @@ import gregtech6.tileentity.misc.MultiTileEntityGregOLantern;
 import twilightforest.entity.boss.EntityTFLich;
 
 public class Behavior_Gun extends AbstractBehaviorDefault {
+
+    public static EnchantmentDamage EnderDamage = Loader.isModLoaded("gregtech_nh") ? EnchantmentEnderDamage.INSTANCE : Enchantment_EnderDamage.INSTANCE;
 
     public static Behavior_Gun BULLETS_SMALL = new Behavior_Gun(TD.Projectiles.BULLET_SMALL, 1.00F, 10000, 16);
     public static Behavior_Gun BULLETS_MEDIUM = new Behavior_Gun(TD.Projectiles.BULLET_MEDIUM, 2.00F, 17500, 8);
@@ -324,7 +329,7 @@ public class Behavior_Gun extends AbstractBehaviorDefault {
             // Endermen require Disjunction Enchantment on the Bullet, or having a Weakness Potion Effect on them.
             if (aTarget instanceof EntityEnderman
                 && ((EntityEnderman) aTarget).getActivePotionEffect(Potion.weakness) == null
-                && UT.NBT.getEnchantmentLevel(Enchantment_EnderDamage.INSTANCE, aBullet) <= 0)
+                && UT.NBT.getEnchantmentLevel(EnderDamage, aBullet) <= 0)
                 for (int i = 0; i < 64; ++i) if (((EntityEnderman) aTarget).teleportRandomly()) return F;
             // EntityLivingBase, Ender Dragon and End Crystals only.
             if (!(aTarget instanceof EntityLivingBase || aTarget instanceof EntityDragonPart
@@ -341,7 +346,7 @@ public class Behavior_Gun extends AbstractBehaviorDefault {
                 tMagicDamage = (aTarget instanceof EntityLivingBase
                     ? EnchantmentHelper.func_152377_a(aBullet, ((EntityLivingBase) aTarget).getCreatureAttribute())
                     : aTarget instanceof EntityDragonPart
-                        ? UT.NBT.getEnchantmentLevel(Enchantment_EnderDamage.INSTANCE, aBullet)
+                        ? UT.NBT.getEnchantmentLevel(EnderDamage, aBullet)
                         : 0),
                 tDamage = tSpeedFactor * Math.max(0, tGunMat.mToolQuality * 0.5F + tMassFactor);
             int tImplosion = UT.NBT.getEnchantmentLevelImplosion(aBullet),

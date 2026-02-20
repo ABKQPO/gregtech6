@@ -38,7 +38,7 @@ public class Enchantment_Radioactivity extends EnchantmentDamage {
     public static Enchantment_Radioactivity INSTANCE;
 
     public Enchantment_Radioactivity() {
-        super(Config.addIDConfig(ConfigCategories.IDs.enchantments, "Radioactivity", 14), 0, -1);
+        super(Config.addIDConfig(ConfigCategories.IDs.enchantments, "Radioactivity", 18), 0, -1);
         LH.add(getName(), "Radioactivity");
         MT.Cyanite.addEnchantmentForTools(this, 1)
             .addEnchantmentForDamage(this, 1)
