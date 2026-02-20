@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(EntityMinecart.class)
 public class MixinEntityMinecartSpeedCap {
 
-    @Inject(method = "getMaxCartSpeedOnRail()F", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getMaxCartSpeedOnRail", at = @At("HEAD"), cancellable = true, remap = false)
     private void redirectMaxSpeed(CallbackInfoReturnable<Float> cir) {
         cir.setReturnValue(4.0F);
     }
