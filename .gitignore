@@ -19,8 +19,11 @@
 !/old_todo_list.txt
 
 # Build files
-!/build.gradle
-!/settings.gradle
+!/build.gradle.kts
+!/dependencies.gradle
+!/settings.gradle.kts
+!/repositories.gradle
+!/gradle.properties
 !/gradlew
 !/gradlew.bat
 !/gradle/wrapper/gradle-wrapper.jar
