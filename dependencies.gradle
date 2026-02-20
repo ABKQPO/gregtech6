@@ -86,6 +86,7 @@ dependencies {
         exclude group: 'com.github.GTNewHorizons', module: 'Applied-Energistics-2-Unofficial'
         exclude group: 'com.github.GTNewHorizons', module: 'AE2FluidCraft-Rework'
     }
+    implementation('com.github.GTNewHorizons:nei-custom-diagram:1.7.5:dev')
 
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughEnergistics:1.7.14:dev")
     runtimeOnlyNonPublishable(rfg.deobf("curse.maven:spark-361579:4271867"))
