@@ -19,16 +19,18 @@
 
 package gregapi.render;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * @author Gregorius Techneticies
  */
 public interface IRenderedBlockObjectSideCheck {
-	/** returning false stops all the other Rendering from happening on that Side. */
-	@SideOnly(Side.CLIENT)
-	public boolean renderFullBlockSide(Block aBlock, RenderBlocks aRenderer, byte aSide);
+
+    /** returning false stops all the other Rendering from happening on that Side. */
+    @SideOnly(Side.CLIENT)
+    public boolean renderFullBlockSide(Block aBlock, RenderBlocks aRenderer, byte aSide);
 }

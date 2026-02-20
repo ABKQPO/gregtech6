@@ -23,6 +23,8 @@ import static gregapi.data.CS.*;
 
 import java.util.Set;
 
+import net.minecraft.item.ItemStack;
+
 import gregapi.code.HashSetNoNulls;
 import gregapi.code.ItemStackContainer;
 import gregapi.data.ANY;
@@ -33,56 +35,99 @@ import gregapi.oredict.OreDictManager;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.util.OM;
 import gregapi.util.ST;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author Gregorius Techneticies
  */
 public class BeamEntry {
-	public final Set<WoodEntry> mWoodEntries = new HashSetNoNulls<>();
-	public ItemStack mBeam, mStick;
-	public int mPlankCountHand, mPlankCountSaw, mPlankCountBuzz, mStickCountSaw, mStickCountLathe, mCharcoalCount, mCreosoteAmount;
-	public PlankEntry mPlankEntry;
-	public OreDictMaterial mMaterialBeam = MT.Wood;
-	
-	public BeamEntry(ItemStack aBeam, PlankEntry aPlank) {
-		this(aBeam, aPlank, 1, 200, 3, 5, 7);
-	}
-	public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount) {
-		this(aBeam, aPlank, aCharcoalCount, aCreosoteAmount, 3, 5, 7);
-	}
-	public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount, int aPlankCountHand, int aPlankCountSaw, int aPlankCountBuzz) {
-		this(aBeam, aPlank, aCharcoalCount, aCreosoteAmount, aPlankCountHand, aPlankCountSaw, aPlankCountBuzz, aPlank.mMaterialPlank);
-	}
-	public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount, int aPlankCountHand, int aPlankCountSaw, int aPlankCountBuzz, OreDictMaterial aMaterialWood) {
-		this(aBeam, aPlank, aCharcoalCount, aCreosoteAmount, aPlankCountHand, aPlankCountSaw, aPlankCountBuzz, aMaterialWood, OP.stickLong.mat(aMaterialWood, 1));
-	}
-	public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount, int aPlankCountHand, int aPlankCountSaw, int aPlankCountBuzz, OreDictMaterial aMaterialWood, ItemStack aStick) {
-		this(aBeam, aPlank, aCharcoalCount, aCreosoteAmount, aPlankCountHand, aPlankCountSaw, aPlankCountBuzz, aMaterialWood, aStick, 3, 5);
-	}
-	public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount, int aPlankCountHand, int aPlankCountSaw, int aPlankCountBuzz, OreDictMaterial aMaterialWood, ItemStack aStick, int aStickCountSaw, int aStickCountLathe) {
-		if (ST.invalid(aBeam)) return;
-		
-		mBeam = ST.amount(1, aBeam);
-		mStick = ST.amount(1, aStick);
-		mStickCountSaw = aStickCountSaw;
-		mStickCountLathe = aStickCountLathe;
-		mMaterialBeam = aMaterialWood;
-		mCharcoalCount = aCharcoalCount;
-		mCreosoteAmount = aCreosoteAmount;
-		mPlankCountHand = aPlankCountHand;
-		mPlankCountSaw = aPlankCountSaw;
-		mPlankCountBuzz = aPlankCountBuzz;
-		mPlankEntry = aPlank;
-		mPlankEntry.mBeamEntries.add(this);
-		
-		if (ST.valid(mBeam) && !WoodDictionary.WOODS.containsKey(new ItemStackContainer(mBeam))) {
-			if (ST.meta(mBeam) == W) for (int i = 0; i < 16; i++) {ItemStack tBeam = ST.copyMeta(i, mBeam);
-			if (OM.materialcontained(tBeam, T, MT.Wood, MT.WoodRubber, ANY.Wood)) OreDictManager.INSTANCE.setItemData_(tBeam, new OreDictItemData(mMaterialBeam, (mPlankCountBuzz+1)*U));}
-			if (OM.materialcontained(mBeam, T, MT.Wood, MT.WoodRubber, ANY.Wood)) OreDictManager.INSTANCE.setItemData_(mBeam, new OreDictItemData(mMaterialBeam, (mPlankCountBuzz+1)*U));
-			WoodDictionary.BEAMS.put(mBeam, this);
-			WoodDictionary.LIST_BEAMS.add(this);
-			WoodDictionary.IGNORED_OREDICT_REGISTRATIONS.add(ST.item_(mBeam));
-		}
-	}
+
+    public final Set<WoodEntry> mWoodEntries = new HashSetNoNulls<>();
+    public ItemStack mBeam, mStick;
+    public int mPlankCountHand, mPlankCountSaw, mPlankCountBuzz, mStickCountSaw, mStickCountLathe, mCharcoalCount,
+        mCreosoteAmount;
+    public PlankEntry mPlankEntry;
+    public OreDictMaterial mMaterialBeam = MT.Wood;
+
+    public BeamEntry(ItemStack aBeam, PlankEntry aPlank) {
+        this(aBeam, aPlank, 1, 200, 3, 5, 7);
+    }
+
+    public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount) {
+        this(aBeam, aPlank, aCharcoalCount, aCreosoteAmount, 3, 5, 7);
+    }
+
+    public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount, int aPlankCountHand,
+        int aPlankCountSaw, int aPlankCountBuzz) {
+        this(
+            aBeam,
+            aPlank,
+            aCharcoalCount,
+            aCreosoteAmount,
+            aPlankCountHand,
+            aPlankCountSaw,
+            aPlankCountBuzz,
+            aPlank.mMaterialPlank);
+    }
+
+    public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount, int aPlankCountHand,
+        int aPlankCountSaw, int aPlankCountBuzz, OreDictMaterial aMaterialWood) {
+        this(
+            aBeam,
+            aPlank,
+            aCharcoalCount,
+            aCreosoteAmount,
+            aPlankCountHand,
+            aPlankCountSaw,
+            aPlankCountBuzz,
+            aMaterialWood,
+            OP.stickLong.mat(aMaterialWood, 1));
+    }
+
+    public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount, int aPlankCountHand,
+        int aPlankCountSaw, int aPlankCountBuzz, OreDictMaterial aMaterialWood, ItemStack aStick) {
+        this(
+            aBeam,
+            aPlank,
+            aCharcoalCount,
+            aCreosoteAmount,
+            aPlankCountHand,
+            aPlankCountSaw,
+            aPlankCountBuzz,
+            aMaterialWood,
+            aStick,
+            3,
+            5);
+    }
+
+    public BeamEntry(ItemStack aBeam, PlankEntry aPlank, int aCharcoalCount, int aCreosoteAmount, int aPlankCountHand,
+        int aPlankCountSaw, int aPlankCountBuzz, OreDictMaterial aMaterialWood, ItemStack aStick, int aStickCountSaw,
+        int aStickCountLathe) {
+        if (ST.invalid(aBeam)) return;
+
+        mBeam = ST.amount(1, aBeam);
+        mStick = ST.amount(1, aStick);
+        mStickCountSaw = aStickCountSaw;
+        mStickCountLathe = aStickCountLathe;
+        mMaterialBeam = aMaterialWood;
+        mCharcoalCount = aCharcoalCount;
+        mCreosoteAmount = aCreosoteAmount;
+        mPlankCountHand = aPlankCountHand;
+        mPlankCountSaw = aPlankCountSaw;
+        mPlankCountBuzz = aPlankCountBuzz;
+        mPlankEntry = aPlank;
+        mPlankEntry.mBeamEntries.add(this);
+
+        if (ST.valid(mBeam) && !WoodDictionary.WOODS.containsKey(new ItemStackContainer(mBeam))) {
+            if (ST.meta(mBeam) == W) for (int i = 0; i < 16; i++) {
+                ItemStack tBeam = ST.copyMeta(i, mBeam);
+                if (OM.materialcontained(tBeam, T, MT.Wood, MT.WoodRubber, ANY.Wood)) OreDictManager.INSTANCE
+                    .setItemData_(tBeam, new OreDictItemData(mMaterialBeam, (mPlankCountBuzz + 1) * U));
+            }
+            if (OM.materialcontained(mBeam, T, MT.Wood, MT.WoodRubber, ANY.Wood)) OreDictManager.INSTANCE
+                .setItemData_(mBeam, new OreDictItemData(mMaterialBeam, (mPlankCountBuzz + 1) * U));
+            WoodDictionary.BEAMS.put(mBeam, this);
+            WoodDictionary.LIST_BEAMS.add(this);
+            WoodDictionary.IGNORED_OREDICT_REGISTRATIONS.add(ST.item_(mBeam));
+        }
+    }
 }

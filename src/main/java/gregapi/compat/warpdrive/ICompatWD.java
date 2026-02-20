@@ -22,5 +22,5 @@ package gregapi.compat.warpdrive;
 import gregapi.compat.ICompat;
 
 public interface ICompatWD extends ICompat {
-	//
+    //
 }

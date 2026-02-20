@@ -31,25 +31,29 @@ import gregapi.util.UT;
  * @author Gregorius Techneticies
  */
 public class CoverLogisticsDisplayCPUConversion extends AbstractCoverAttachmentLogisticsDisplay {
-	public static final CoverLogisticsDisplayCPUConversion INSTANCE = new CoverLogisticsDisplayCPUConversion();
-	
-	public CoverLogisticsDisplayCPUConversion() {}
-	
-	@Override public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {return BlockTextureMulti.get(sTexturesBase, sTextures[(int)UT.Code.bind_(0, 10, aData.mVisuals[aSide])]);}
-	
-	public static final ITexture[] sTextures = new ITexture[] {
-		  BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/0", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/1", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/2", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/3", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/4", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/5", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/6", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/7", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/8", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/9", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/10", T)
-	};
-	
-	public static final ITexture sTexturesBase = BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/underlay");
+
+    public static final CoverLogisticsDisplayCPUConversion INSTANCE = new CoverLogisticsDisplayCPUConversion();
+
+    public CoverLogisticsDisplayCPUConversion() {}
+
+    @Override
+    public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {
+        return BlockTextureMulti.get(sTexturesBase, sTextures[(int) UT.Code.bind_(0, 10, aData.mVisuals[aSide])]);
+    }
+
+    public static final ITexture[] sTextures = new ITexture[] {
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/0", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/1", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/2", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/3", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/4", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/5", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/6", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/7", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/8", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/9", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_conversion/10", T) };
+
+    public static final ITexture sTexturesBase = BlockTextureDefault
+        .get("machines/covers/logistics/display/cpu_conversion/underlay");
 }

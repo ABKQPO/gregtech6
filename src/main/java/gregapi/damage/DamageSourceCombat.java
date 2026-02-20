@@ -19,28 +19,33 @@
 
 package gregapi.damage;
 
+import static gregapi.data.CS.F;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.IChatComponent;
-
-import static gregapi.data.CS.F;
 
 /**
  * @author Gregorius Techneticies
  */
 public class DamageSourceCombat extends EntityDamageSource {
-	private IChatComponent mDeathMessage;
-	public boolean mBeheadingDamage = F;
-	
-	public DamageSourceCombat(String aType, EntityLivingBase aPlayer, IChatComponent aDeathMessage) {this(aType, aPlayer, aDeathMessage, F);}
-	public DamageSourceCombat(String aType, EntityLivingBase aPlayer, IChatComponent aDeathMessage, boolean aBeheadingDamage) {
-		super(aType, aPlayer);
-		mBeheadingDamage = aBeheadingDamage;
-		mDeathMessage = aDeathMessage;
-	}
-	
-	@Override
-	public IChatComponent func_151519_b(EntityLivingBase aTarget) {
-		return mDeathMessage == null ? super.func_151519_b(aTarget) : mDeathMessage;
-	}
+
+    private IChatComponent mDeathMessage;
+    public boolean mBeheadingDamage = F;
+
+    public DamageSourceCombat(String aType, EntityLivingBase aPlayer, IChatComponent aDeathMessage) {
+        this(aType, aPlayer, aDeathMessage, F);
+    }
+
+    public DamageSourceCombat(String aType, EntityLivingBase aPlayer, IChatComponent aDeathMessage,
+        boolean aBeheadingDamage) {
+        super(aType, aPlayer);
+        mBeheadingDamage = aBeheadingDamage;
+        mDeathMessage = aDeathMessage;
+    }
+
+    @Override
+    public IChatComponent func_151519_b(EntityLivingBase aTarget) {
+        return mDeathMessage == null ? super.func_151519_b(aTarget) : mDeathMessage;
+    }
 }

@@ -19,23 +19,22 @@
 
 package gregapi.block;
 
+import static gregapi.data.CS.F;
+
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 
-import static gregapi.data.CS.F;
-
 public class MaterialAdventure extends Material {
-	public static Material
-	  WOOD = new MaterialAdventure(MapColor.woodColor).setBurning()
-	;
-	
-	private MaterialAdventure(MapColor aColor) {
-		super(aColor);
-		setAdventureModeExempt();
-	}
-	
-	@Override
-	public boolean isOpaque() {
-		return F;
-	}
+
+    public static Material WOOD = new MaterialAdventure(MapColor.woodColor).setBurning();
+
+    private MaterialAdventure(MapColor aColor) {
+        super(aColor);
+        setAdventureModeExempt();
+    }
+
+    @Override
+    public boolean isOpaque() {
+        return F;
+    }
 }

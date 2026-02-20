@@ -29,12 +29,14 @@ import net.minecraft.util.IChatComponent;
  * @author Gregorius Techneticies
  */
 public class DamageSourceFrost extends DamageSource {
-	public DamageSourceFrost() {
-		super("frost");
-	}
-	
-	@Override
-	public IChatComponent func_151519_b(EntityLivingBase aTarget) {
-		return new ChatComponentText(EnumChatFormatting.RED+aTarget.getCommandSenderName()+EnumChatFormatting.WHITE + " got frozen");
-	}
+
+    public DamageSourceFrost() {
+        super("frost");
+    }
+
+    @Override
+    public IChatComponent func_151519_b(EntityLivingBase aTarget) {
+        return new ChatComponentText(
+            EnumChatFormatting.RED + aTarget.getCommandSenderName() + EnumChatFormatting.WHITE + " got frozen");
+    }
 }

@@ -31,34 +31,56 @@ import net.minecraft.world.biome.BiomeGenBase;
  * @author Gregorius Techneticies
  */
 public class BiomeNameSet extends AbstractSet<String> {
-	private transient HashMap<String, Object> map;
-	private static final Object OBJECT = new Object();
-	
-	@SafeVarargs
-	public BiomeNameSet(Object... aArray) {
-		map = new HashMap<>(Math.max((int)(aArray.length/.75F) + 1, 16));
-		for (Object aName : aArray) add(aName instanceof BiomeGenBase ? ((BiomeGenBase)aName).biomeName : aName.toString());
-	}
-	
-	@Override
-	public boolean contains(Object aName) {
-		if (aName == null) return F;
-		String aString = (aName instanceof BiomeGenBase ? ((BiomeGenBase)aName).biomeName : aName.toString());
-		if (aString == null || aString.isEmpty()) return F;
-		return map.containsKey(aString.toLowerCase());
-	}
-	
-	@Override
-	public boolean add(String aName) {
-		if (aName == null || aName.isEmpty()) return F;
-		aName = aName.toLowerCase();
-		if (!aName.endsWith(" m")) add(aName + " m");
-		return map.put(aName, OBJECT) == null;
-	}
-	
-	@Override public Iterator<String> iterator() {return map.keySet().iterator();}
-	@Override public boolean remove(Object aName) {return map.remove(aName)==OBJECT;}
-	@Override public boolean isEmpty() {return map.isEmpty();}
-	@Override public int size() {return map.size();}
-	@Override public void clear() {map.clear();}
+
+    private transient HashMap<String, Object> map;
+    private static final Object OBJECT = new Object();
+
+    @SafeVarargs
+    public BiomeNameSet(Object... aArray) {
+        map = new HashMap<>(Math.max((int) (aArray.length / .75F) + 1, 16));
+        for (Object aName : aArray)
+            add(aName instanceof BiomeGenBase ? ((BiomeGenBase) aName).biomeName : aName.toString());
+    }
+
+    @Override
+    public boolean contains(Object aName) {
+        if (aName == null) return F;
+        String aString = (aName instanceof BiomeGenBase ? ((BiomeGenBase) aName).biomeName : aName.toString());
+        if (aString == null || aString.isEmpty()) return F;
+        return map.containsKey(aString.toLowerCase());
+    }
+
+    @Override
+    public boolean add(String aName) {
+        if (aName == null || aName.isEmpty()) return F;
+        aName = aName.toLowerCase();
+        if (!aName.endsWith(" m")) add(aName + " m");
+        return map.put(aName, OBJECT) == null;
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return map.keySet()
+            .iterator();
+    }
+
+    @Override
+    public boolean remove(Object aName) {
+        return map.remove(aName) == OBJECT;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return map.isEmpty();
+    }
+
+    @Override
+    public int size() {
+        return map.size();
+    }
+
+    @Override
+    public void clear() {
+        map.clear();
+    }
 }

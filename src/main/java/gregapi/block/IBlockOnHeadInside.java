@@ -26,5 +26,6 @@ import net.minecraft.world.World;
  * @author Gregorius Techneticies
  */
 public interface IBlockOnHeadInside {
-	public void onHeadInside(EntityLivingBase aEntity, World aWorld, int aX, int aY, int aZ);
+
+    public void onHeadInside(EntityLivingBase aEntity, World aWorld, int aX, int aY, int aZ);
 }

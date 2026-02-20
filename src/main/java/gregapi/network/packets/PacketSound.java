@@ -19,58 +19,61 @@
 
 package gregapi.network.packets;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import gregapi.network.INetworkHandler;
-import gregapi.util.UT;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.IBlockAccess;
+
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
+
+import gregapi.network.INetworkHandler;
+import gregapi.util.UT;
 
 /**
  * @author Gregorius Techneticies
  */
 public class PacketSound extends PacketCoordinates {
-	private String mSound;
-	private float mVolume, mPitch;
-	
-	public PacketSound(int aDecoderType) {
-		super(aDecoderType);
-	}
-	
-	public PacketSound(String aSound, float aVolume, float aPitch, ChunkCoordinates aCoords) {
-		super(aCoords);
-		mSound = aSound;
-		mVolume = aVolume;
-		mPitch = aPitch;
-	}
-	
-	public PacketSound(String aSound, float aVolume, float aPitch, int aX, int aY, int aZ) {
-		super(aX, aY, aZ);
-		mSound = aSound;
-		mVolume = aVolume;
-		mPitch = aPitch;
-	}
-	
-	@Override
-	public byte getPacketIDOffset() {
-		return -128;
-	}
-	
-	@Override
-	public ByteArrayDataOutput encode2(ByteArrayDataOutput aData) {
-		aData.writeUTF(mSound);
-		aData.writeFloat(mVolume);
-		aData.writeFloat(mPitch);
-		return aData;
-	}
-	
-	@Override
-	public PacketCoordinates decode2(int aX, int aY, int aZ, ByteArrayDataInput aData) {
-		return new PacketSound(aData.readUTF(), aData.readFloat(), aData.readFloat(), aX, aY, aZ);
-	}
-	
-	@Override
-	public void process(IBlockAccess aWorld, INetworkHandler aNetworkHandler) {
-		UT.Sounds.play(mSound, 2, mVolume, mPitch, mX, mY, mZ);
-	}
+
+    private String mSound;
+    private float mVolume, mPitch;
+
+    public PacketSound(int aDecoderType) {
+        super(aDecoderType);
+    }
+
+    public PacketSound(String aSound, float aVolume, float aPitch, ChunkCoordinates aCoords) {
+        super(aCoords);
+        mSound = aSound;
+        mVolume = aVolume;
+        mPitch = aPitch;
+    }
+
+    public PacketSound(String aSound, float aVolume, float aPitch, int aX, int aY, int aZ) {
+        super(aX, aY, aZ);
+        mSound = aSound;
+        mVolume = aVolume;
+        mPitch = aPitch;
+    }
+
+    @Override
+    public byte getPacketIDOffset() {
+        return -128;
+    }
+
+    @Override
+    public ByteArrayDataOutput encode2(ByteArrayDataOutput aData) {
+        aData.writeUTF(mSound);
+        aData.writeFloat(mVolume);
+        aData.writeFloat(mPitch);
+        return aData;
+    }
+
+    @Override
+    public PacketCoordinates decode2(int aX, int aY, int aZ, ByteArrayDataInput aData) {
+        return new PacketSound(aData.readUTF(), aData.readFloat(), aData.readFloat(), aX, aY, aZ);
+    }
+
+    @Override
+    public void process(IBlockAccess aWorld, INetworkHandler aNetworkHandler) {
+        UT.Sounds.play(mSound, 2, mVolume, mPitch, mX, mY, mZ);
+    }
 }

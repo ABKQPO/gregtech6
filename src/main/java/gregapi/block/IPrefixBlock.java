@@ -24,6 +24,7 @@ import gregapi.item.IItemGT;
 /**
  * @author Gregorius Techneticies
  */
-public interface IPrefixBlock extends IBlockExtendedMetaData, IBlockPlacable, IBlockRetrievable, IBlockMaterial, IBlock, IItemGT {
-	/** Empty Compound Interface flagging an Item as GregTech Prefix Block. */
+public interface IPrefixBlock
+    extends IBlockExtendedMetaData, IBlockPlacable, IBlockRetrievable, IBlockMaterial, IBlock, IItemGT {
+    /** Empty Compound Interface flagging an Item as GregTech Prefix Block. */
 }

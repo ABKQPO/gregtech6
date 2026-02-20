@@ -21,23 +21,35 @@ package gregapi.cover;
 
 import java.util.List;
 
-import gregapi.tileentity.ITileEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
+import gregapi.tileentity.ITileEntity;
+
 /**
  * @author Gregorius Techneticies
  */
 public interface ITileEntityCoverable extends ITileEntity {
-	public boolean setCoverItem(byte aSide, ItemStack aStack, Entity aPlayer, boolean aForce, boolean aBlockUpdate);
-	public ItemStack getCoverItem(byte aSide);
-	public CoverData getCoverData();
-	public void openCoverGUI(byte aSide, EntityPlayer aPlayer);
-	public void receiveBlockUpdateFromCover();
-	public void sendBlockUpdateFromCover();
-	public void updateCoverVisuals();
-	public boolean canTick();
-	public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide, float aHitX, float aHitY, float aHitZ);
+
+    public boolean setCoverItem(byte aSide, ItemStack aStack, Entity aPlayer, boolean aForce, boolean aBlockUpdate);
+
+    public ItemStack getCoverItem(byte aSide);
+
+    public CoverData getCoverData();
+
+    public void openCoverGUI(byte aSide, EntityPlayer aPlayer);
+
+    public void receiveBlockUpdateFromCover();
+
+    public void sendBlockUpdateFromCover();
+
+    public void updateCoverVisuals();
+
+    public boolean canTick();
+
+    public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer,
+        List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide,
+        float aHitX, float aHitY, float aHitZ);
 }

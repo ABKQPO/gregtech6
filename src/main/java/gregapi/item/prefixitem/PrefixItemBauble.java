@@ -19,6 +19,12 @@
 
 package gregapi.item.prefixitem;
 
+import static gregapi.data.CS.T;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+
 import baubles.api.IBauble;
 import cpw.mods.fml.common.Optional;
 import gregapi.code.ModData;
@@ -28,44 +34,51 @@ import gregapi.oredict.OreDictMaterial;
 import gregapi.oredict.OreDictPrefix;
 import gregapi.util.ST;
 import gregapi.util.UT;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import thaumcraft.api.IWarpingGear;
-
-import static gregapi.data.CS.T;
 
 /**
  * @author Gregorius Techneticies
  */
-@Optional.InterfaceList(value = {
-  @Optional.Interface(iface = "baubles.api.IBauble", modid = ModIDs.BAUBLES)
-, @Optional.Interface(iface = "thaumcraft.api.IWarpingGear", modid = ModIDs.TC)
-})
+@Optional.InterfaceList(
+    value = { @Optional.Interface(iface = "baubles.api.IBauble", modid = ModIDs.BAUBLES),
+        @Optional.Interface(iface = "thaumcraft.api.IWarpingGear", modid = ModIDs.TC) })
 public abstract class PrefixItemBauble extends PrefixItem implements IBauble, IWarpingGear {
-	public PrefixItemBauble(ModData aMod, String aNameInternal, OreDictPrefix aPrefix) {
-		this(aMod.mID, aMod.mID, aNameInternal, aPrefix, OreDictMaterial.MATERIAL_ARRAY);
-	}
-	
-	public PrefixItemBauble(String aModIDOwner, String aModIDTextures, String aNameInternal, OreDictPrefix aPrefix, OreDictMaterial... aMaterialList) {
-		super(aModIDOwner, aModIDTextures, aNameInternal, aPrefix, aMaterialList);
-	}
-	
-	@Override
-	public int getWarp(ItemStack aStack, EntityPlayer aPlayer) {
-		OreDictMaterial tMat = getMaterial(ST.meta(aStack));
-		return tMat != null && tMat.contains(TD.Properties.WARPING) ? 1 : 0;
-	}
-	
-	@Override
-	public void onWornTick(ItemStack aStack, EntityLivingBase aPlayer) {
-		if (aPlayer.ticksExisted % 120 == 0 && !UT.Entities.isInvincible(aPlayer)) {
-			UT.Entities.applyRadioactivity(aPlayer, UT.Entities.getRadioactivityLevel(aStack), aStack.stackSize);
-		}
-	}
-	
-	@Override public void onEquipped(ItemStack aStack, EntityLivingBase aPlayer) {/**/}
-	@Override public void onUnequipped(ItemStack aStack, EntityLivingBase aPlayer) {/**/}
-	@Override public boolean canEquip(ItemStack aStack, EntityLivingBase aPlayer) {return T;/*aStack != null && aStack.stackSize == 1;*/}
-	@Override public boolean canUnequip(ItemStack aStack, EntityLivingBase aPlayer) {return T;}
+
+    public PrefixItemBauble(ModData aMod, String aNameInternal, OreDictPrefix aPrefix) {
+        this(aMod.mID, aMod.mID, aNameInternal, aPrefix, OreDictMaterial.MATERIAL_ARRAY);
+    }
+
+    public PrefixItemBauble(String aModIDOwner, String aModIDTextures, String aNameInternal, OreDictPrefix aPrefix,
+        OreDictMaterial... aMaterialList) {
+        super(aModIDOwner, aModIDTextures, aNameInternal, aPrefix, aMaterialList);
+    }
+
+    @Override
+    public int getWarp(ItemStack aStack, EntityPlayer aPlayer) {
+        OreDictMaterial tMat = getMaterial(ST.meta(aStack));
+        return tMat != null && tMat.contains(TD.Properties.WARPING) ? 1 : 0;
+    }
+
+    @Override
+    public void onWornTick(ItemStack aStack, EntityLivingBase aPlayer) {
+        if (aPlayer.ticksExisted % 120 == 0 && !UT.Entities.isInvincible(aPlayer)) {
+            UT.Entities.applyRadioactivity(aPlayer, UT.Entities.getRadioactivityLevel(aStack), aStack.stackSize);
+        }
+    }
+
+    @Override
+    public void onEquipped(ItemStack aStack, EntityLivingBase aPlayer) {/**/}
+
+    @Override
+    public void onUnequipped(ItemStack aStack, EntityLivingBase aPlayer) {/**/}
+
+    @Override
+    public boolean canEquip(ItemStack aStack, EntityLivingBase aPlayer) {
+        return T;
+        /* aStack != null && aStack.stackSize == 1; */}
+
+    @Override
+    public boolean canUnequip(ItemStack aStack, EntityLivingBase aPlayer) {
+        return T;
+    }
 }

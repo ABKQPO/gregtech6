@@ -25,10 +25,15 @@ import static gregapi.data.CS.*;
  * @author Gregorius Techneticies
  */
 public class DungeonChunkRoomVault extends DungeonChunkRoomEmpty {
-	@Override
-	public boolean generate(DungeonData aData) {
-		if (aData.mConnectionCount != 1 || !super.generate(aData)) return F;
-		try {WorldgenDungeonGT.DOOR_PISTON.generate(aData);} catch(Throwable e) {e.printStackTrace(ERR);} // The Vault Door is not important enough to fail the entire Room.
-		return T;
-	}
+
+    @Override
+    public boolean generate(DungeonData aData) {
+        if (aData.mConnectionCount != 1 || !super.generate(aData)) return F;
+        try {
+            WorldgenDungeonGT.DOOR_PISTON.generate(aData);
+        } catch (Throwable e) {
+            e.printStackTrace(ERR);
+        } // The Vault Door is not important enough to fail the entire Room.
+        return T;
+    }
 }

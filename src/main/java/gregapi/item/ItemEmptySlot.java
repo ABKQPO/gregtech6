@@ -21,41 +21,43 @@ package gregapi.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.util.IIcon;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregapi.data.CS.ItemsGT;
 import gregapi.data.MD;
 import gregapi.old.Textures;
 import gregapi.util.ST;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
 
 /**
  * @author Gregorius Techneticies
  */
 public class ItemEmptySlot extends ItemBase {
-	public ItemEmptySlot() {
-		super(MD.GAPI.mID, "gt.empty_slot", "Empty Slot", "This Slot has to be left Empty");
-		ItemsGT.ILLEGAL_DROPS.add(this);
-		ST.hide(this);
-	}
-	
-	@Override
-	public IIcon getIconFromDamage(int aMeta) {
-		return Textures.ItemIcons.VOID.getIcon(0);
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister aIconRegister) {
-		// No Icons to register!
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public final void getSubItems(Item var1, CreativeTabs aCreativeTab, @SuppressWarnings("rawtypes") List aList) {
-		//
-	}
+
+    public ItemEmptySlot() {
+        super(MD.GAPI.mID, "gt.empty_slot", "Empty Slot", "This Slot has to be left Empty");
+        ItemsGT.ILLEGAL_DROPS.add(this);
+        ST.hide(this);
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int aMeta) {
+        return Textures.ItemIcons.VOID.getIcon(0);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister aIconRegister) {
+        // No Icons to register!
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public final void getSubItems(Item var1, CreativeTabs aCreativeTab, @SuppressWarnings("rawtypes") List aList) {
+        //
+    }
 }

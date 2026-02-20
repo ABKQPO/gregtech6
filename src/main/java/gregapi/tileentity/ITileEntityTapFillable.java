@@ -25,5 +25,6 @@ import net.minecraftforge.fluids.FluidStack;
  * @author Gregorius Techneticies
  */
 public interface ITileEntityTapFillable extends ITileEntityUnloadable {
-	public int tapFill(byte aSide, FluidStack aFluid, boolean aDoFill);
+
+    public int tapFill(byte aSide, FluidStack aFluid, boolean aDoFill);
 }

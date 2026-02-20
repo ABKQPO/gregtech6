@@ -19,9 +19,9 @@
 
 package gregapi.item;
 
-
 /**
- * Empty Interface flagging an Item as GregTech controlled Item. This essentially means that the Item is more sane and less crash-y.
+ * Empty Interface flagging an Item as GregTech controlled Item. This essentially means that the Item is more sane and
+ * less crash-y.
  * 
  * Setting an Item of this Type to Wildcard Metadata will not cause a Crash.
  * The Internal Name of the Item wont be displayed in the Tooltip.
@@ -31,5 +31,5 @@ package gregapi.item;
  * Blocks can have this marker Interface too, since it is just an empty marker.
  */
 public interface IItemGT {
-	/**/
+    /**/
 }

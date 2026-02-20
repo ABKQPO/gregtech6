@@ -22,5 +22,5 @@ package gregapi.compat.opencomputers;
 import gregapi.compat.ICompat;
 
 public interface ICompatOC extends ICompat {
-	//
+    //
 }

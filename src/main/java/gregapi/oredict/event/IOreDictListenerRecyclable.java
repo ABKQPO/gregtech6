@@ -19,28 +19,31 @@
 
 package gregapi.oredict.event;
 
+import net.minecraft.item.ItemStack;
+
 import gregapi.oredict.OreDictItemData;
 import gregapi.util.OM;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author Gregorius Techneticies
  */
 public interface IOreDictListenerRecyclable {
-	public void onRecycleableRegistration(OreDictRecyclingContainer aEvent);
-	
-	public static class OreDictRecyclingContainer {
-		public final OreDictItemData mItemData;
-		public final ItemStack mStack;
-		
-		public OreDictRecyclingContainer(ItemStack aStack, OreDictItemData aItemData) {
-			mItemData = aItemData;
-			mStack = aStack.copy();
-		}
-		
-		public OreDictRecyclingContainer(OreDictRecyclingContainer aItemData) {
-			mItemData = OM.data_(aItemData.mStack);
-			mStack = aItemData.mStack.copy();
-		}
-	}
+
+    public void onRecycleableRegistration(OreDictRecyclingContainer aEvent);
+
+    public static class OreDictRecyclingContainer {
+
+        public final OreDictItemData mItemData;
+        public final ItemStack mStack;
+
+        public OreDictRecyclingContainer(ItemStack aStack, OreDictItemData aItemData) {
+            mItemData = aItemData;
+            mStack = aStack.copy();
+        }
+
+        public OreDictRecyclingContainer(OreDictRecyclingContainer aItemData) {
+            mItemData = OM.data_(aItemData.mStack);
+            mStack = aItemData.mStack.copy();
+        }
+    }
 }

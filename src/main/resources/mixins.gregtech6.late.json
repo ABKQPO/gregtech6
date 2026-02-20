@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8.5-GTNH",
+  "package": "gregtech6.mixins.late",
+  "refmap": "mixins.gregtech6.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinCoFHCrashFix",
+    "MixinRailcraftBoreSpamFix",
+    "MixinComparableItem",
+    "MixinComparableItemStack",
+    "MixinMicroblockProxyFix",
+    "MixinThaumcraftHelper",
+    "MixinScanManager",
+    "MixinThaumcraftCraftingManager",
+    "MixinMultipartProxyServerImpl",
+    "MixinTechnomancyLoadFix"
+  ],
+  "client": [
+  ],
+  "server": []
+}

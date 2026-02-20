@@ -23,33 +23,50 @@ import static gregapi.data.CS.*;
 
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+
 import gregapi.cover.CoverData;
 import gregapi.data.LH;
 import gregapi.util.UT;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author Gregorius Techneticies
  */
 public abstract class AbstractCoverAttachmentLogisticsDisplay extends AbstractCoverAttachmentLogistics {
-	@Override
-	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
-		super.addToolTips(aList, aStack, aF3_H);
-		aList.add(LH.Chat.DGRAY + "Emits Redstone and Displays Status of Logistics Core.");
-	}
-	
-	@Override
-	public byte getRedstoneOutStrong(byte aCoverSide, CoverData aData, byte aDefaultRedstone) {
-		return UT.Code.bind4(aData.mValues[aCoverSide]);
-	}
-	
-	@Override
-	public byte getRedstoneOutWeak(byte aCoverSide, CoverData aData, byte aDefaultRedstone) {
-		return UT.Code.bind4(aData.mValues[aCoverSide]);
-	}
-	
-	@Override public boolean showsConnectorFront(byte aCoverSide, CoverData aData) {return F;}
-	@Override public boolean needsVisualsSaved(byte aSide, CoverData aData) {return T;}
-	@Override public boolean useTargetStackSize() {return F;}
-	@Override public boolean usePriorities() {return F;}
+
+    @Override
+    public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
+        super.addToolTips(aList, aStack, aF3_H);
+        aList.add(LH.Chat.DGRAY + "Emits Redstone and Displays Status of Logistics Core.");
+    }
+
+    @Override
+    public byte getRedstoneOutStrong(byte aCoverSide, CoverData aData, byte aDefaultRedstone) {
+        return UT.Code.bind4(aData.mValues[aCoverSide]);
+    }
+
+    @Override
+    public byte getRedstoneOutWeak(byte aCoverSide, CoverData aData, byte aDefaultRedstone) {
+        return UT.Code.bind4(aData.mValues[aCoverSide]);
+    }
+
+    @Override
+    public boolean showsConnectorFront(byte aCoverSide, CoverData aData) {
+        return F;
+    }
+
+    @Override
+    public boolean needsVisualsSaved(byte aSide, CoverData aData) {
+        return T;
+    }
+
+    @Override
+    public boolean useTargetStackSize() {
+        return F;
+    }
+
+    @Override
+    public boolean usePriorities() {
+        return F;
+    }
 }

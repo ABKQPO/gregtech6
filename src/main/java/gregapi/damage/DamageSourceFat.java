@@ -29,14 +29,16 @@ import net.minecraft.util.IChatComponent;
  * @author Gregorius Techneticies
  */
 public class DamageSourceFat extends DamageSource {
-	public DamageSourceFat() {
-		super("fat");
-		setDamageBypassesArmor();
-		setDamageIsAbsolute();
-	}
-	
-	@Override
-	public IChatComponent func_151519_b(EntityLivingBase aTarget) {
-		return new ChatComponentText(EnumChatFormatting.RED+aTarget.getCommandSenderName()+EnumChatFormatting.WHITE + " got a Heart Attack");
-	}
+
+    public DamageSourceFat() {
+        super("fat");
+        setDamageBypassesArmor();
+        setDamageIsAbsolute();
+    }
+
+    @Override
+    public IChatComponent func_151519_b(EntityLivingBase aTarget) {
+        return new ChatComponentText(
+            EnumChatFormatting.RED + aTarget.getCommandSenderName() + EnumChatFormatting.WHITE + " got a Heart Attack");
+    }
 }

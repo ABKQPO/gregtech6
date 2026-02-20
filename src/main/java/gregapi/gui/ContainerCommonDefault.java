@@ -21,21 +21,27 @@ package gregapi.gui;
 
 import static gregapi.data.CS.*;
 
-import gregapi.tileentity.ITileEntityInventoryGUI;
 import net.minecraft.entity.player.InventoryPlayer;
+
+import gregapi.tileentity.ITileEntityInventoryGUI;
 
 /**
  * @author Gregorius Techneticies
  */
 @invtweaks.api.container.ChestContainer
 public class ContainerCommonDefault extends ContainerCommon {
-	public ContainerCommonDefault(InventoryPlayer aInventoryPlayer, ITileEntityInventoryGUI aTileEntity, int aGUIID, int aOffset, int aSlotCount) {
-		super(aInventoryPlayer, aTileEntity, aGUIID, aOffset, aSlotCount);
-	}
-	
-	public ContainerCommonDefault(InventoryPlayer aInventoryPlayer, ITileEntityInventoryGUI aTileEntity, int aGUIID) {
-		super(aInventoryPlayer, aTileEntity, aGUIID);
-	}
-	
-	@Override public boolean useDefaultSlots() {return T;}
+
+    public ContainerCommonDefault(InventoryPlayer aInventoryPlayer, ITileEntityInventoryGUI aTileEntity, int aGUIID,
+        int aOffset, int aSlotCount) {
+        super(aInventoryPlayer, aTileEntity, aGUIID, aOffset, aSlotCount);
+    }
+
+    public ContainerCommonDefault(InventoryPlayer aInventoryPlayer, ITileEntityInventoryGUI aTileEntity, int aGUIID) {
+        super(aInventoryPlayer, aTileEntity, aGUIID);
+    }
+
+    @Override
+    public boolean useDefaultSlots() {
+        return T;
+    }
 }

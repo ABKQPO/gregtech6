@@ -19,7 +19,6 @@
 
 package gregapi.tileentity;
 
-
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 
@@ -27,6 +26,8 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
  * @author Gregorius Techneticies
  */
 public interface ITileEntityMobSpawnInhibitor extends ITileEntityUnloadable, ITileEntityErrorable {
-	public boolean inhibitMobSpawn(LivingSpawnEvent.CheckSpawn aEvent, World aWorld, int aX, int aY, int aZ);
-	public void onUnregisterInhibitor();
+
+    public boolean inhibitMobSpawn(LivingSpawnEvent.CheckSpawn aEvent, World aWorld, int aX, int aY, int aZ);
+
+    public void onUnregisterInhibitor();
 }

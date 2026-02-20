@@ -29,14 +29,18 @@ import net.minecraft.util.IChatComponent;
  * @author Gregorius Techneticies
  */
 public class DamageSourceDehydration extends DamageSource {
-	public DamageSourceDehydration() {
-		super("dehydration");
-		setDamageBypassesArmor();
-		setDamageIsAbsolute();
-	}
-	
-	@Override
-	public IChatComponent func_151519_b(EntityLivingBase aTarget) {
-		return new ChatComponentText(EnumChatFormatting.RED+aTarget.getCommandSenderName()+EnumChatFormatting.WHITE + " took more than the deadly dose of Salt");
-	}
+
+    public DamageSourceDehydration() {
+        super("dehydration");
+        setDamageBypassesArmor();
+        setDamageIsAbsolute();
+    }
+
+    @Override
+    public IChatComponent func_151519_b(EntityLivingBase aTarget) {
+        return new ChatComponentText(
+            EnumChatFormatting.RED + aTarget.getCommandSenderName()
+                + EnumChatFormatting.WHITE
+                + " took more than the deadly dose of Salt");
+    }
 }

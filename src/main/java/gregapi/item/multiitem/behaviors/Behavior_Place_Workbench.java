@@ -21,45 +21,52 @@ package gregapi.item.multiitem.behaviors;
 
 import static gregapi.data.CS.*;
 
-import gregapi.data.OD;
-import gregapi.item.multiitem.MultiItem;
-import gregapi.item.multiitem.behaviors.IBehavior.AbstractBehaviorDefault;
-import gregapi.util.ST;
-import gregapi.util.UT;
-import gregapi.util.WD;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import gregapi.data.OD;
+import gregapi.item.multiitem.MultiItem;
+import gregapi.item.multiitem.behaviors.IBehavior.AbstractBehaviorDefault;
+import gregapi.util.ST;
+import gregapi.util.UT;
+import gregapi.util.WD;
+
 public class Behavior_Place_Workbench extends AbstractBehaviorDefault {
-	public static final Behavior_Place_Workbench INSTANCE = new Behavior_Place_Workbench();
-	
-	@Override
-	public boolean onItemUse(MultiItem aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, byte aSide, float aHitX, float aHitY, float aHitZ) {
-		if (aWorld.isRemote || aPlayer == null || !aPlayer.canPlayerEdit(aX, aY, aZ, aSide, aStack)) return F;
-		
-		Block aBlock = WD.block(aWorld, aX, aY, aZ);
-		// Don't place Workbenches on Wood or Plants, since this Class is supposed to be used by Axes and Saws.
-		if (aBlock.getMaterial() == Material.wood || aBlock.getMaterial() == Material.leaves || aBlock.getMaterial() == Material.plants || aBlock.getMaterial() == Material.vine || aBlock.getMaterial() == Material.gourd || aBlock.getMaterial() == Material.cactus) return F;
-		if (aBlock.isWood(aWorld, aX, aY, aZ) || aBlock.isLeaves(aWorld, aX, aY, aZ)) return F;
-		// Scan Inventory for suitable Workbenches.
-		for (int i = 0; i < aPlayer.inventory.mainInventory.length; i++) {
-			ItemStack tStack = aPlayer.inventory.mainInventory[aPlayer.inventory.mainInventory.length-i-1];
-			if (!OD.craftingWorkBench.is(tStack)) continue;
-			
-			int tOldSize = tStack.stackSize;
-			if (tStack.tryPlaceItemIntoWorld(aPlayer, aWorld, aX, aY, aZ, aSide, aHitX, aHitY, aHitZ)) {
-				if (UT.Entities.hasInfiniteItems(aPlayer)) {
-					tStack.stackSize = tOldSize;
-				} else {
-					ST.use(aPlayer, T, tStack, 0);
-				}
-				return T;
-			}
-			return F;
-		}
-		return F;
-	}
+
+    public static final Behavior_Place_Workbench INSTANCE = new Behavior_Place_Workbench();
+
+    @Override
+    public boolean onItemUse(MultiItem aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY,
+        int aZ, byte aSide, float aHitX, float aHitY, float aHitZ) {
+        if (aWorld.isRemote || aPlayer == null || !aPlayer.canPlayerEdit(aX, aY, aZ, aSide, aStack)) return F;
+
+        Block aBlock = WD.block(aWorld, aX, aY, aZ);
+        // Don't place Workbenches on Wood or Plants, since this Class is supposed to be used by Axes and Saws.
+        if (aBlock.getMaterial() == Material.wood || aBlock.getMaterial() == Material.leaves
+            || aBlock.getMaterial() == Material.plants
+            || aBlock.getMaterial() == Material.vine
+            || aBlock.getMaterial() == Material.gourd
+            || aBlock.getMaterial() == Material.cactus) return F;
+        if (aBlock.isWood(aWorld, aX, aY, aZ) || aBlock.isLeaves(aWorld, aX, aY, aZ)) return F;
+        // Scan Inventory for suitable Workbenches.
+        for (int i = 0; i < aPlayer.inventory.mainInventory.length; i++) {
+            ItemStack tStack = aPlayer.inventory.mainInventory[aPlayer.inventory.mainInventory.length - i - 1];
+            if (!OD.craftingWorkBench.is(tStack)) continue;
+
+            int tOldSize = tStack.stackSize;
+            if (tStack.tryPlaceItemIntoWorld(aPlayer, aWorld, aX, aY, aZ, aSide, aHitX, aHitY, aHitZ)) {
+                if (UT.Entities.hasInfiniteItems(aPlayer)) {
+                    tStack.stackSize = tOldSize;
+                } else {
+                    ST.use(aPlayer, T, tStack, 0);
+                }
+                return T;
+            }
+            return F;
+        }
+        return F;
+    }
 }

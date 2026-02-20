@@ -29,12 +29,20 @@ import gregapi.render.ITexture;
  * @author Gregorius Techneticies
  */
 public class CoverLogisticsGenericDump extends AbstractCoverAttachmentLogistics {
-	public static final CoverLogisticsGenericDump INSTANCE = new CoverLogisticsGenericDump();
-	
-	public CoverLogisticsGenericDump() {}
-	
-	@Override public ITexture getCoverTextureSurface(byte aCoverSide, CoverData aData) {return sTexture;}
-	@Override public boolean usePriorities() {return F;}
-	
-	public static final ITexture sTexture = BlockTextureDefault.get("machines/covers/logistics/generic/dump");
+
+    public static final CoverLogisticsGenericDump INSTANCE = new CoverLogisticsGenericDump();
+
+    public CoverLogisticsGenericDump() {}
+
+    @Override
+    public ITexture getCoverTextureSurface(byte aCoverSide, CoverData aData) {
+        return sTexture;
+    }
+
+    @Override
+    public boolean usePriorities() {
+        return F;
+    }
+
+    public static final ITexture sTexture = BlockTextureDefault.get("machines/covers/logistics/generic/dump");
 }

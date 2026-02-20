@@ -29,12 +29,16 @@ import net.minecraft.util.IChatComponent;
  * @author Gregorius Techneticies
  */
 public class DamageSourceShredder extends DamageSource {
-	public DamageSourceShredder() {
-		super("shredder");
-	}
-	
-	@Override
-	public IChatComponent func_151519_b(EntityLivingBase aTarget) {
-		return new ChatComponentText(EnumChatFormatting.RED+aTarget.getCommandSenderName()+EnumChatFormatting.WHITE + " was shred into flakes");
-	}
+
+    public DamageSourceShredder() {
+        super("shredder");
+    }
+
+    @Override
+    public IChatComponent func_151519_b(EntityLivingBase aTarget) {
+        return new ChatComponentText(
+            EnumChatFormatting.RED + aTarget.getCommandSenderName()
+                + EnumChatFormatting.WHITE
+                + " was shred into flakes");
+    }
 }

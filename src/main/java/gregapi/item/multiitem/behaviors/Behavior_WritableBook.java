@@ -23,34 +23,36 @@ import static gregapi.data.CS.*;
 
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregapi.data.LH;
 import gregapi.item.multiitem.MultiItem;
 import gregapi.item.multiitem.behaviors.IBehavior.AbstractBehaviorDefault;
 import gregapi.util.UT;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class Behavior_WritableBook extends AbstractBehaviorDefault {
-	public static final Behavior_WritableBook INSTANCE = new Behavior_WritableBook();
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ItemStack onItemRightClick(MultiItem aItem, ItemStack aStack, World aWorld, EntityPlayer aPlayer) {
-		UT.Books.display(aPlayer, T, aStack);
-		return super.onItemRightClick(aItem, aStack, aWorld, aPlayer);
-	}
-	
-	@Override
-	public List<String> getAdditionalToolTips(MultiItem aItem, List<String> aList, ItemStack aStack) {
-		String tTitle = UT.NBT.getBookTitle(aStack);
-		if (UT.Code.stringValid(tTitle)) {
-			aList.add(LH.Chat.CYAN + tTitle);
-		} else {
-			aList.add(LH.Chat.CYAN + "Untitled");
-		}
-		return aList;
-	}
+
+    public static final Behavior_WritableBook INSTANCE = new Behavior_WritableBook();
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public ItemStack onItemRightClick(MultiItem aItem, ItemStack aStack, World aWorld, EntityPlayer aPlayer) {
+        UT.Books.display(aPlayer, T, aStack);
+        return super.onItemRightClick(aItem, aStack, aWorld, aPlayer);
+    }
+
+    @Override
+    public List<String> getAdditionalToolTips(MultiItem aItem, List<String> aList, ItemStack aStack) {
+        String tTitle = UT.NBT.getBookTitle(aStack);
+        if (UT.Code.stringValid(tTitle)) {
+            aList.add(LH.Chat.CYAN + tTitle);
+        } else {
+            aList.add(LH.Chat.CYAN + "Untitled");
+        }
+        return aList;
+    }
 }

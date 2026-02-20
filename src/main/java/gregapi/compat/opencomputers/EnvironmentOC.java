@@ -19,6 +19,12 @@
 
 package gregapi.compat.opencomputers;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+
+import net.minecraft.tileentity.TileEntity;
+
 import gregapi.computer.IComputerizable;
 import gregapi.tileentity.delegate.DelegatorTileEntity;
 import li.cil.oc.api.Network;
@@ -28,48 +34,47 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.ManagedPeripheral;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.ManagedEnvironment;
-import net.minecraft.tileentity.TileEntity;
-
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
 
 public class EnvironmentOC extends ManagedEnvironment implements ManagedPeripheral, NamedBlock {
-	public final DelegatorTileEntity<TileEntity> mDelegator;
-	public final IComputerizable mDeviceType;
-	public final String mDeviceName;
-	public final String[] mDeviceMethods;
-	public final List<String> mDeviceMethodList;
-	
-	public EnvironmentOC(IComputerizable aDeviceType, DelegatorTileEntity<TileEntity> aDelegator) {
-		mDelegator = aDelegator;
-		mDeviceType = aDeviceType;
-		mDeviceName = mDeviceType.getComputerizableName(mDelegator);
-		mDeviceMethods = mDeviceType.allComputerizableMethods(mDelegator);
-		mDeviceMethodList = Arrays.asList(mDeviceMethods);
-		setNode(Network.newNode(this, Visibility.Network).create());
-	}
-	
-	@Override
-	public Object[] invoke(String aMethod, Context aContext, Arguments aArgs) {
-		int aIndex = mDeviceMethodList.indexOf(aMethod);
-		Object[] tArgs = aArgs.toArray();
-		for (int i = 0; i < tArgs.length; i++) if (tArgs[i] instanceof byte[]) tArgs[i] = new String((byte[]) tArgs[i], StandardCharsets.UTF_8);
-		return mDeviceType.callComputerizableMethod(mDelegator, aIndex, tArgs);
-	}
-	
-	@Override
-	public String[] methods() {
-		return mDeviceMethods;
-	}
-	
-	@Override
-	public String preferredName() {
-		return mDeviceName;
-	}
-	
-	@Override
-	public int priority() {
-		return 0;
-	}
+
+    public final DelegatorTileEntity<TileEntity> mDelegator;
+    public final IComputerizable mDeviceType;
+    public final String mDeviceName;
+    public final String[] mDeviceMethods;
+    public final List<String> mDeviceMethodList;
+
+    public EnvironmentOC(IComputerizable aDeviceType, DelegatorTileEntity<TileEntity> aDelegator) {
+        mDelegator = aDelegator;
+        mDeviceType = aDeviceType;
+        mDeviceName = mDeviceType.getComputerizableName(mDelegator);
+        mDeviceMethods = mDeviceType.allComputerizableMethods(mDelegator);
+        mDeviceMethodList = Arrays.asList(mDeviceMethods);
+        setNode(
+            Network.newNode(this, Visibility.Network)
+                .create());
+    }
+
+    @Override
+    public Object[] invoke(String aMethod, Context aContext, Arguments aArgs) {
+        int aIndex = mDeviceMethodList.indexOf(aMethod);
+        Object[] tArgs = aArgs.toArray();
+        for (int i = 0; i < tArgs.length; i++)
+            if (tArgs[i] instanceof byte[]) tArgs[i] = new String((byte[]) tArgs[i], StandardCharsets.UTF_8);
+        return mDeviceType.callComputerizableMethod(mDelegator, aIndex, tArgs);
+    }
+
+    @Override
+    public String[] methods() {
+        return mDeviceMethods;
+    }
+
+    @Override
+    public String preferredName() {
+        return mDeviceName;
+    }
+
+    @Override
+    public int priority() {
+        return 0;
+    }
 }

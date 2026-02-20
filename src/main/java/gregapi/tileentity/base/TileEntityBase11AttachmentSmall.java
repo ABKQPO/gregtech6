@@ -19,13 +19,18 @@
 
 package gregapi.tileentity.base;
 
-import gregapi.block.multitileentity.IMultiTileEntity;
-
 import static gregapi.data.CS.T;
+
+import gregapi.block.multitileentity.IMultiTileEntity;
 
 /**
  * @author Gregorius Techneticies
  */
-public abstract class TileEntityBase11AttachmentSmall extends TileEntityBase10Attachment implements IMultiTileEntity.IMTE_IgnorePlayerCollisionWhenPlacing {
-	@Override public boolean ignorePlayerCollisionWhenPlacing() {return T;}
+public abstract class TileEntityBase11AttachmentSmall extends TileEntityBase10Attachment
+    implements IMultiTileEntity.IMTE_IgnorePlayerCollisionWhenPlacing {
+
+    @Override
+    public boolean ignorePlayerCollisionWhenPlacing() {
+        return T;
+    }
 }

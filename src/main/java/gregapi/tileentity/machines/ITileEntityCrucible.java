@@ -25,5 +25,6 @@ import gregapi.tileentity.ITileEntityUnloadable;
  * @author Gregorius Techneticies
  */
 public interface ITileEntityCrucible extends ITileEntityUnloadable {
-	public boolean fillMoldAtSide(ITileEntityMold aMold, byte aSide, byte aSideOfMold);
+
+    public boolean fillMoldAtSide(ITileEntityMold aMold, byte aSide, byte aSideOfMold);
 }

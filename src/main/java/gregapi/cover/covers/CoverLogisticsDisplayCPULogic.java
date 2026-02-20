@@ -31,25 +31,29 @@ import gregapi.util.UT;
  * @author Gregorius Techneticies
  */
 public class CoverLogisticsDisplayCPULogic extends AbstractCoverAttachmentLogisticsDisplay {
-	public static final CoverLogisticsDisplayCPULogic INSTANCE = new CoverLogisticsDisplayCPULogic();
-	
-	public CoverLogisticsDisplayCPULogic() {}
-	
-	@Override public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {return BlockTextureMulti.get(sTexturesBase, sTextures[(int)UT.Code.bind_(0, 10, aData.mVisuals[aSide])]);}
-	
-	public static final ITexture[] sTextures = new ITexture[] {
-		  BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/0", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/1", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/2", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/3", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/4", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/5", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/6", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/7", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/8", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/9", T)
-		, BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/10", T)
-	};
-	
-	public static final ITexture sTexturesBase = BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/underlay");
+
+    public static final CoverLogisticsDisplayCPULogic INSTANCE = new CoverLogisticsDisplayCPULogic();
+
+    public CoverLogisticsDisplayCPULogic() {}
+
+    @Override
+    public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {
+        return BlockTextureMulti.get(sTexturesBase, sTextures[(int) UT.Code.bind_(0, 10, aData.mVisuals[aSide])]);
+    }
+
+    public static final ITexture[] sTextures = new ITexture[] {
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/0", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/1", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/2", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/3", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/4", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/5", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/6", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/7", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/8", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/9", T),
+        BlockTextureDefault.get("machines/covers/logistics/display/cpu_logic/10", T) };
+
+    public static final ITexture sTexturesBase = BlockTextureDefault
+        .get("machines/covers/logistics/display/cpu_logic/underlay");
 }

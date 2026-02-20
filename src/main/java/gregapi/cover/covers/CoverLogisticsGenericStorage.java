@@ -27,11 +27,15 @@ import gregapi.render.ITexture;
  * @author Gregorius Techneticies
  */
 public class CoverLogisticsGenericStorage extends AbstractCoverAttachmentLogistics {
-	public static final CoverLogisticsGenericStorage INSTANCE = new CoverLogisticsGenericStorage();
-	
-	public CoverLogisticsGenericStorage() {}
-	
-	@Override public ITexture getCoverTextureSurface(byte aCoverSide, CoverData aData) {return sTexture;}
-	
-	public static final ITexture sTexture = BlockTextureDefault.get("machines/covers/logistics/generic/storage");
+
+    public static final CoverLogisticsGenericStorage INSTANCE = new CoverLogisticsGenericStorage();
+
+    public CoverLogisticsGenericStorage() {}
+
+    @Override
+    public ITexture getCoverTextureSurface(byte aCoverSide, CoverData aData) {
+        return sTexture;
+    }
+
+    public static final ITexture sTexture = BlockTextureDefault.get("machines/covers/logistics/generic/storage");
 }

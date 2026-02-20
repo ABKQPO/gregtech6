@@ -22,12 +22,28 @@ package gregapi.compat;
 import cpw.mods.fml.common.event.*;
 
 public abstract class CompatBase implements ICompat {
-	@Override public void onPreLoad       (FMLPreInitializationEvent aEvent) {/**/}
-	@Override public void onLoad          (FMLInitializationEvent aEvent) {/**/}
-	@Override public void onPostLoad      (FMLPostInitializationEvent aEvent) {/**/}
-	@Override public void onServerStarting(FMLServerStartingEvent aEvent) {/**/}
-	@Override public void onServerStarted (FMLServerStartedEvent aEvent) {/**/}
-	@Override public void onServerStopping(FMLServerStoppingEvent aEvent) {/**/}
-	@Override public void onServerStopped (FMLServerStoppedEvent aEvent) {/**/}
-	@Override public void onIDChanging    (FMLModIdMappingEvent aEvent) {/**/}
+
+    @Override
+    public void onPreLoad(FMLPreInitializationEvent aEvent) {/**/}
+
+    @Override
+    public void onLoad(FMLInitializationEvent aEvent) {/**/}
+
+    @Override
+    public void onPostLoad(FMLPostInitializationEvent aEvent) {/**/}
+
+    @Override
+    public void onServerStarting(FMLServerStartingEvent aEvent) {/**/}
+
+    @Override
+    public void onServerStarted(FMLServerStartedEvent aEvent) {/**/}
+
+    @Override
+    public void onServerStopping(FMLServerStoppingEvent aEvent) {/**/}
+
+    @Override
+    public void onServerStopped(FMLServerStoppedEvent aEvent) {/**/}
+
+    @Override
+    public void onIDChanging(FMLModIdMappingEvent aEvent) {/**/}
 }

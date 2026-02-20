@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8.5-GTNH",
+  "package": "gregtech6.mixins.early",
+  "refmap": "mixins.gregtech6.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinMinecraftServerFix",
+    "MixinBlockIce",
+    "MixinBlockStaticLiquid",
+    "MixinEntityAICreeperSwell",
+    "MixinEntityMinecartSpeedCap",
+    "MixinEntityZombieVillagerConversion"
+  ],
+  "client": [
+  ],
+  "server": []
+}

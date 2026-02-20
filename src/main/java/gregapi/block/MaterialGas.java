@@ -25,16 +25,32 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.MaterialLiquid;
 
 public class MaterialGas extends MaterialLiquid {
-	public static MaterialGas instance = new MaterialGas();
-	
-	private MaterialGas() {
-		super(MapColor.snowColor);
-		setNoPushMobility();
-		setReplaceable();
-	}
-	
-	@Override public boolean isOpaque() {return F;}
-	@Override public boolean isLiquid() {return T;}
-	@Override public boolean isSolid() {return F;}
-	@Override public boolean blocksMovement() {return F;}
+
+    public static MaterialGas instance = new MaterialGas();
+
+    private MaterialGas() {
+        super(MapColor.snowColor);
+        setNoPushMobility();
+        setReplaceable();
+    }
+
+    @Override
+    public boolean isOpaque() {
+        return F;
+    }
+
+    @Override
+    public boolean isLiquid() {
+        return T;
+    }
+
+    @Override
+    public boolean isSolid() {
+        return F;
+    }
+
+    @Override
+    public boolean blocksMovement() {
+        return F;
+    }
 }

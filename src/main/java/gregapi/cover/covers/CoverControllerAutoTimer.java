@@ -32,25 +32,42 @@ import gregapi.tileentity.machines.ITileEntitySwitchableOnOff;
  * @author Gregorius Techneticies
  */
 public class CoverControllerAutoTimer extends AbstractCoverAttachmentController {
-	public final int mTime;
-	public final ITexture mTextureForeground;
-	
-	public CoverControllerAutoTimer(int aTime) {
-		mTime = Math.max(11, aTime);
-		mTextureForeground = BlockTextureDefault.get("machines/covers/autotimerswitch/"+mTime+"/circuit");
-	}
-	
-	@Override public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {return mTextureForeground;}
-	@Override public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {return aSide != aTextureSide ? BACKGROUND_COVER : BlockTextureMulti.get(BACKGROUND_COVER, mTextureForeground);}
-	@Override public ITexture getCoverTextureHolder(byte aSide, CoverData aData, byte aTextureSide) {return BACKGROUND_COVER;}
-	
-	@Override
-	public void onTickPre(byte aSide, CoverData aData, long aTimer, boolean aIsServerSide, boolean aReceivedBlockUpdate, boolean aReceivedInventoryUpdate) {
-		if (aIsServerSide && aData.mTileEntity instanceof ITileEntitySwitchableOnOff) ((ITileEntitySwitchableOnOff)aData.mTileEntity).setStateOnOff((aData.mTileEntity instanceof ITileEntityRunningActively && ((ITileEntityRunningActively)aData.mTileEntity).getStateRunningActively()) || aTimer % mTime >= mTime - 10);
-	}
-	
-	@Override
-	public boolean getStateOnOff(byte aSide, CoverData aData) {
-		return T;
-	}
+
+    public final int mTime;
+    public final ITexture mTextureForeground;
+
+    public CoverControllerAutoTimer(int aTime) {
+        mTime = Math.max(11, aTime);
+        mTextureForeground = BlockTextureDefault.get("machines/covers/autotimerswitch/" + mTime + "/circuit");
+    }
+
+    @Override
+    public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {
+        return mTextureForeground;
+    }
+
+    @Override
+    public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {
+        return aSide != aTextureSide ? BACKGROUND_COVER : BlockTextureMulti.get(BACKGROUND_COVER, mTextureForeground);
+    }
+
+    @Override
+    public ITexture getCoverTextureHolder(byte aSide, CoverData aData, byte aTextureSide) {
+        return BACKGROUND_COVER;
+    }
+
+    @Override
+    public void onTickPre(byte aSide, CoverData aData, long aTimer, boolean aIsServerSide, boolean aReceivedBlockUpdate,
+        boolean aReceivedInventoryUpdate) {
+        if (aIsServerSide && aData.mTileEntity instanceof ITileEntitySwitchableOnOff)
+            ((ITileEntitySwitchableOnOff) aData.mTileEntity).setStateOnOff(
+                (aData.mTileEntity instanceof ITileEntityRunningActively
+                    && ((ITileEntityRunningActively) aData.mTileEntity).getStateRunningActively())
+                    || aTimer % mTime >= mTime - 10);
+    }
+
+    @Override
+    public boolean getStateOnOff(byte aSide, CoverData aData) {
+        return T;
+    }
 }

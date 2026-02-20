@@ -28,9 +28,21 @@ import gregapi.render.ITexture;
  * @author Gregorius Techneticies
  */
 public class CoverRedstoneConductorIN extends AbstractCoverAttachment {
-	@Override public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {return sTexture;}
-	@Override public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {return aSide != aTextureSide ? BACKGROUND_COVER : BlockTextureMulti.get(BACKGROUND_COVER, sTexture);}
-	@Override public ITexture getCoverTextureHolder(byte aSide, CoverData aData, byte aTextureSide) {return BACKGROUND_COVER;}
-	
-	public static final ITexture sTexture = BlockTextureDefault.get("machines/covers/redstoneconductor/in");
+
+    @Override
+    public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {
+        return sTexture;
+    }
+
+    @Override
+    public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {
+        return aSide != aTextureSide ? BACKGROUND_COVER : BlockTextureMulti.get(BACKGROUND_COVER, sTexture);
+    }
+
+    @Override
+    public ITexture getCoverTextureHolder(byte aSide, CoverData aData, byte aTextureSide) {
+        return BACKGROUND_COVER;
+    }
+
+    public static final ITexture sTexture = BlockTextureDefault.get("machines/covers/redstoneconductor/in");
 }

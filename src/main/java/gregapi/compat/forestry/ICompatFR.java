@@ -19,10 +19,13 @@
 
 package gregapi.compat.forestry;
 
-import gregapi.compat.ICompat;
 import net.minecraft.item.ItemStack;
 
+import gregapi.compat.ICompat;
+
 public interface ICompatFR extends ICompat {
-	public void addWindfall(ItemStack aStack);
-	public void addToBackpacks(String aType, ItemStack aStack);
+
+    public void addWindfall(ItemStack aStack);
+
+    public void addToBackpacks(String aType, ItemStack aStack);
 }

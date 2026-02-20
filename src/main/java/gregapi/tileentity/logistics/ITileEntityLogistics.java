@@ -25,5 +25,6 @@ import gregapi.cover.ITileEntityCoverable;
  * @author Gregorius Techneticies
  */
 public interface ITileEntityLogistics extends ITileEntityCoverable {
-	public boolean canLogistics(byte aSide);
+
+    public boolean canLogistics(byte aSide);
 }

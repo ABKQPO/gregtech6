@@ -29,13 +29,20 @@ import gregapi.render.ITexture;
  * @author Gregorius Techneticies
  */
 public class CoverLogisticsGenericImport extends AbstractCoverAttachmentLogistics {
-	public static final CoverLogisticsGenericImport INSTANCE = new CoverLogisticsGenericImport();
-	
-	public CoverLogisticsGenericImport() {}
-	
-	@Override public ITexture getCoverTextureSurface(byte aCoverSide, CoverData aData) {return sTexture;}
-	
-	@Override public boolean useTargetStackSize() {return T;}
-	
-	public static final ITexture sTexture = BlockTextureDefault.get("machines/covers/logistics/generic/import");
+
+    public static final CoverLogisticsGenericImport INSTANCE = new CoverLogisticsGenericImport();
+
+    public CoverLogisticsGenericImport() {}
+
+    @Override
+    public ITexture getCoverTextureSurface(byte aCoverSide, CoverData aData) {
+        return sTexture;
+    }
+
+    @Override
+    public boolean useTargetStackSize() {
+        return T;
+    }
+
+    public static final ITexture sTexture = BlockTextureDefault.get("machines/covers/logistics/generic/import");
 }

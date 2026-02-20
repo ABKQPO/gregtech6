@@ -19,37 +19,48 @@
 
 package gregapi.oredict.event;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
+
 import gregapi.data.MT;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.oredict.OreDictPrefix;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 
 /**
  * @author Gregorius Techneticies
  */
 public interface IOreDictListenerEvent {
-	/** Any Event will buffered to be called after the Unification has been set, so you can access all the Unification things, regardless of when you register your Listener! */
-	public void onOreRegistration(OreDictRegistrationContainer aEvent);
-	
-	public static class OreDictRegistrationContainer {
-		public final OreDictPrefix mPrefix;
-		public final OreDictMaterial mMaterial;
-		public final String mOreDictName, mModName, mRegName;
-		public final ItemStack mStack;
-		public final OreRegisterEvent mEvent;
-		/** If something else hasn't already been registered under the same Name before. Useful for preventing duplicate Crafting Recipes. */
-		public final boolean mNotAlreadyRegisteredName;
-		
-		public OreDictRegistrationContainer(OreDictPrefix aPrefix, OreDictMaterial aMaterial, String aOreDictName, ItemStack aStack, OreRegisterEvent aEvent, String aModName, String aRegName, boolean aNotAlreadyRegisteredName) {
-			mPrefix = aPrefix;
-			mMaterial = (aMaterial==null?MT.NULL:aMaterial);
-			mOreDictName = aOreDictName;
-			mModName = aModName;
-			mRegName = aRegName;
-			mStack = aStack.copy();
-			mEvent = aEvent;
-			mNotAlreadyRegisteredName = aNotAlreadyRegisteredName;
-		}
-	}
+
+    /**
+     * Any Event will buffered to be called after the Unification has been set, so you can access all the Unification
+     * things, regardless of when you register your Listener!
+     */
+    public void onOreRegistration(OreDictRegistrationContainer aEvent);
+
+    public static class OreDictRegistrationContainer {
+
+        public final OreDictPrefix mPrefix;
+        public final OreDictMaterial mMaterial;
+        public final String mOreDictName, mModName, mRegName;
+        public final ItemStack mStack;
+        public final OreRegisterEvent mEvent;
+        /**
+         * If something else hasn't already been registered under the same Name before. Useful for preventing duplicate
+         * Crafting Recipes.
+         */
+        public final boolean mNotAlreadyRegisteredName;
+
+        public OreDictRegistrationContainer(OreDictPrefix aPrefix, OreDictMaterial aMaterial, String aOreDictName,
+            ItemStack aStack, OreRegisterEvent aEvent, String aModName, String aRegName,
+            boolean aNotAlreadyRegisteredName) {
+            mPrefix = aPrefix;
+            mMaterial = (aMaterial == null ? MT.NULL : aMaterial);
+            mOreDictName = aOreDictName;
+            mModName = aModName;
+            mRegName = aRegName;
+            mStack = aStack.copy();
+            mEvent = aEvent;
+            mNotAlreadyRegisteredName = aNotAlreadyRegisteredName;
+        }
+    }
 }

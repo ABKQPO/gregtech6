@@ -23,6 +23,7 @@ package gregapi.worldgen.dungeon;
  * @author Gregorius Techneticies
  */
 public interface IDungeonChunk {
-	/** @return true if it generated something, false if a Condition wasn't met and you did not generate something. */
-	public boolean generate(DungeonData aData);
+
+    /** @return true if it generated something, false if a Condition wasn't met and you did not generate something. */
+    public boolean generate(DungeonData aData);
 }

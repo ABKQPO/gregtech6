@@ -26,11 +26,14 @@ import net.minecraftforge.fluids.Fluid;
  * @author Gregorius Techneticies
  */
 public interface ITileEntityLogisticsStorage extends ITileEntityLogistics {
-	/** @return 0 = Disabled, 1 = Generic, 2 = Semi-Filtered, 3 = Filtered */
-	public int getLogisticsPriorityFluid();
-	/** @return 0 = Disabled, 1 = Generic, 2 = Semi-Filtered, 3 = Filtered */
-	public int getLogisticsPriorityItem();
-	
-	public Fluid getLogisticsFilterFluid();
-	public ItemStack getLogisticsFilterItem();
+
+    /** @return 0 = Disabled, 1 = Generic, 2 = Semi-Filtered, 3 = Filtered */
+    public int getLogisticsPriorityFluid();
+
+    /** @return 0 = Disabled, 1 = Generic, 2 = Semi-Filtered, 3 = Filtered */
+    public int getLogisticsPriorityItem();
+
+    public Fluid getLogisticsFilterFluid();
+
+    public ItemStack getLogisticsFilterItem();
 }

@@ -19,30 +19,84 @@
 
 package gregapi.recipes.maps;
 
-import gregapi.random.IHasWorldAndCoords;
-import gregapi.recipes.Recipe;
-import gregapi.recipes.Recipe.RecipeMap;
+import static gregapi.data.CS.F;
+
+import java.util.Collection;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Collection;
-
-import static gregapi.data.CS.F;
+import gregapi.random.IHasWorldAndCoords;
+import gregapi.recipes.Recipe;
+import gregapi.recipes.Recipe.RecipeMap;
 
 /**
  * @author Gregorius Techneticies
  */
 public abstract class RecipeMapNonGTRecipes extends RecipeMap {
-	public RecipeMapNonGTRecipes(Collection<Recipe> aRecipeList, String aUnlocalizedName, String aNameLocal, String aNameNEI, long aProgressBarDirection, long aProgressBarAmount, String aNEIGUIPath, long aInputItemsCount, long aOutputItemsCount, long aMinimalInputItems, long aInputFluidCount, long aOutputFluidCount, long aMinimalInputFluids, long aMinimalInputs, long aPower, String aNEISpecialValuePre, long aNEISpecialValueMultiplier, String aNEISpecialValuePost, boolean aShowVoltageAmperageInNEI, boolean aNEIAllowed, boolean aConfigAllowed, boolean aNeedsOutputs, boolean aCombinePower, boolean aUseBucketSizeIn, boolean aUseBucketSizeOut) {
-		super(aRecipeList, aUnlocalizedName, aNameLocal, aNameNEI, aProgressBarDirection, aProgressBarAmount, aNEIGUIPath, aInputItemsCount, aOutputItemsCount, aMinimalInputItems, aInputFluidCount, aOutputFluidCount, aMinimalInputFluids, aMinimalInputs, aPower, aNEISpecialValuePre, aNEISpecialValueMultiplier, aNEISpecialValuePost, F, aShowVoltageAmperageInNEI, aNEIAllowed, aConfigAllowed, aNeedsOutputs, aCombinePower, aUseBucketSizeIn, aUseBucketSizeOut);
-	}
-	
-	@Override public boolean containsInput(ItemStack aStack, IHasWorldAndCoords aTileEntity, ItemStack aSpecialSlot) {return F;}
-	@Override public boolean containsInput(FluidStack aFluid, IHasWorldAndCoords aTileEntity, ItemStack aSpecialSlot) {return F;}
-	@Override public boolean containsInput(Fluid aFluid, IHasWorldAndCoords aTileEntity, ItemStack aSpecialSlot) {return F;}
-	
-	@Override public Recipe add(Recipe aRecipe) {return null;}
-	@Override public void reInit() {/**/}
-	@Override public Recipe addToItemMap(Recipe aRecipe) {return null;}
+
+    public RecipeMapNonGTRecipes(Collection<Recipe> aRecipeList, String aUnlocalizedName, String aNameLocal,
+        String aNameNEI, long aProgressBarDirection, long aProgressBarAmount, String aNEIGUIPath, long aInputItemsCount,
+        long aOutputItemsCount, long aMinimalInputItems, long aInputFluidCount, long aOutputFluidCount,
+        long aMinimalInputFluids, long aMinimalInputs, long aPower, String aNEISpecialValuePre,
+        long aNEISpecialValueMultiplier, String aNEISpecialValuePost, boolean aShowVoltageAmperageInNEI,
+        boolean aNEIAllowed, boolean aConfigAllowed, boolean aNeedsOutputs, boolean aCombinePower,
+        boolean aUseBucketSizeIn, boolean aUseBucketSizeOut) {
+        super(
+            aRecipeList,
+            aUnlocalizedName,
+            aNameLocal,
+            aNameNEI,
+            aProgressBarDirection,
+            aProgressBarAmount,
+            aNEIGUIPath,
+            aInputItemsCount,
+            aOutputItemsCount,
+            aMinimalInputItems,
+            aInputFluidCount,
+            aOutputFluidCount,
+            aMinimalInputFluids,
+            aMinimalInputs,
+            aPower,
+            aNEISpecialValuePre,
+            aNEISpecialValueMultiplier,
+            aNEISpecialValuePost,
+            F,
+            aShowVoltageAmperageInNEI,
+            aNEIAllowed,
+            aConfigAllowed,
+            aNeedsOutputs,
+            aCombinePower,
+            aUseBucketSizeIn,
+            aUseBucketSizeOut);
+    }
+
+    @Override
+    public boolean containsInput(ItemStack aStack, IHasWorldAndCoords aTileEntity, ItemStack aSpecialSlot) {
+        return F;
+    }
+
+    @Override
+    public boolean containsInput(FluidStack aFluid, IHasWorldAndCoords aTileEntity, ItemStack aSpecialSlot) {
+        return F;
+    }
+
+    @Override
+    public boolean containsInput(Fluid aFluid, IHasWorldAndCoords aTileEntity, ItemStack aSpecialSlot) {
+        return F;
+    }
+
+    @Override
+    public Recipe add(Recipe aRecipe) {
+        return null;
+    }
+
+    @Override
+    public void reInit() {/**/}
+
+    @Override
+    public Recipe addToItemMap(Recipe aRecipe) {
+        return null;
+    }
 }

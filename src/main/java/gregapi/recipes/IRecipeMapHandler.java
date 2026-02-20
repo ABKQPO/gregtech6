@@ -21,49 +21,102 @@ package gregapi.recipes;
 
 import static gregapi.data.CS.*;
 
-import gregapi.oredict.OreDictItemData;
-import gregapi.recipes.Recipe.RecipeMap;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
+
+import gregapi.oredict.OreDictItemData;
+import gregapi.recipes.Recipe.RecipeMap;
 
 /**
  * @author Gregorius Techneticies
  */
 public interface IRecipeMapHandler {
-	public boolean addRecipesUsing(RecipeMap aMap, boolean aNEI, ItemStack aStack, OreDictItemData aData);
-	public boolean addRecipesUsing(RecipeMap aMap, boolean aNEI, Fluid aFluid);
-	
-	public boolean addRecipesProducing(RecipeMap aMap, boolean aNEI, ItemStack aStack, OreDictItemData aData);
-	public boolean addRecipesProducing(RecipeMap aMap, boolean aNEI, Fluid aFluid);
-	
-	public boolean containsInput(RecipeMap aMap, ItemStack aStack, OreDictItemData aData);
-	public boolean containsInput(RecipeMap aMap, Fluid aFluid);
-	
-	public boolean addAllRecipes(RecipeMap aMap);
-	public boolean isDone();
-	
-	public boolean onAddedToMap(RecipeMap aMap);
-	
-	public static abstract class RecipeMapHandler implements IRecipeMapHandler {
-		public RecipeMapHandler() {/**/}
-		
-		@Override public boolean addRecipesUsing(RecipeMap aMap, boolean aNEI, ItemStack aStack, OreDictItemData aData) {return addRecipesUsing(aMap, aStack, aData);}
-		@Override public boolean addRecipesUsing(RecipeMap aMap, boolean aNEI, Fluid aFluid) {return addRecipesUsing(aMap, aFluid);}
-		
-		@Override public boolean addRecipesProducing(RecipeMap aMap, boolean aNEI, ItemStack aStack, OreDictItemData aData) {return addRecipesProducing(aMap, aStack, aData);}
-		@Override public boolean addRecipesProducing(RecipeMap aMap, boolean aNEI, Fluid aFluid) {return addRecipesProducing(aMap, aFluid);}
-		
-		@Override public boolean containsInput(RecipeMap aMap, ItemStack aStack, OreDictItemData aData) {return !isDone() && addRecipesUsing(aMap, F, aStack, aData);}
-		@Override public boolean containsInput(RecipeMap aMap, Fluid aFluid) {return !isDone() && addRecipesUsing(aMap, F, aFluid);}
-		
-		@Override public boolean addAllRecipes(RecipeMap aMap) {return F;}
-		@Override public boolean isDone() {return F;}
-		
-		@Override public boolean onAddedToMap(RecipeMap aMap) {return T;}
-		
-		@Deprecated public boolean addRecipesUsing(RecipeMap aMap, ItemStack aStack, OreDictItemData aData) {return F;}
-		@Deprecated public boolean addRecipesUsing(RecipeMap aMap, Fluid aFluid) {return F;}
-		@Deprecated public boolean addRecipesProducing(RecipeMap aMap, ItemStack aStack, OreDictItemData aData) {return F;}
-		@Deprecated public boolean addRecipesProducing(RecipeMap aMap, Fluid aFluid) {return F;}
-	}
+
+    public boolean addRecipesUsing(RecipeMap aMap, boolean aNEI, ItemStack aStack, OreDictItemData aData);
+
+    public boolean addRecipesUsing(RecipeMap aMap, boolean aNEI, Fluid aFluid);
+
+    public boolean addRecipesProducing(RecipeMap aMap, boolean aNEI, ItemStack aStack, OreDictItemData aData);
+
+    public boolean addRecipesProducing(RecipeMap aMap, boolean aNEI, Fluid aFluid);
+
+    public boolean containsInput(RecipeMap aMap, ItemStack aStack, OreDictItemData aData);
+
+    public boolean containsInput(RecipeMap aMap, Fluid aFluid);
+
+    public boolean addAllRecipes(RecipeMap aMap);
+
+    public boolean isDone();
+
+    public boolean onAddedToMap(RecipeMap aMap);
+
+    public static abstract class RecipeMapHandler implements IRecipeMapHandler {
+
+        public RecipeMapHandler() {/**/}
+
+        @Override
+        public boolean addRecipesUsing(RecipeMap aMap, boolean aNEI, ItemStack aStack, OreDictItemData aData) {
+            return addRecipesUsing(aMap, aStack, aData);
+        }
+
+        @Override
+        public boolean addRecipesUsing(RecipeMap aMap, boolean aNEI, Fluid aFluid) {
+            return addRecipesUsing(aMap, aFluid);
+        }
+
+        @Override
+        public boolean addRecipesProducing(RecipeMap aMap, boolean aNEI, ItemStack aStack, OreDictItemData aData) {
+            return addRecipesProducing(aMap, aStack, aData);
+        }
+
+        @Override
+        public boolean addRecipesProducing(RecipeMap aMap, boolean aNEI, Fluid aFluid) {
+            return addRecipesProducing(aMap, aFluid);
+        }
+
+        @Override
+        public boolean containsInput(RecipeMap aMap, ItemStack aStack, OreDictItemData aData) {
+            return !isDone() && addRecipesUsing(aMap, F, aStack, aData);
+        }
+
+        @Override
+        public boolean containsInput(RecipeMap aMap, Fluid aFluid) {
+            return !isDone() && addRecipesUsing(aMap, F, aFluid);
+        }
+
+        @Override
+        public boolean addAllRecipes(RecipeMap aMap) {
+            return F;
+        }
+
+        @Override
+        public boolean isDone() {
+            return F;
+        }
+
+        @Override
+        public boolean onAddedToMap(RecipeMap aMap) {
+            return T;
+        }
+
+        @Deprecated
+        public boolean addRecipesUsing(RecipeMap aMap, ItemStack aStack, OreDictItemData aData) {
+            return F;
+        }
+
+        @Deprecated
+        public boolean addRecipesUsing(RecipeMap aMap, Fluid aFluid) {
+            return F;
+        }
+
+        @Deprecated
+        public boolean addRecipesProducing(RecipeMap aMap, ItemStack aStack, OreDictItemData aData) {
+            return F;
+        }
+
+        @Deprecated
+        public boolean addRecipesProducing(RecipeMap aMap, Fluid aFluid) {
+            return F;
+        }
+    }
 }

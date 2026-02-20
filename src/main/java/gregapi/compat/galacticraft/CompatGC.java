@@ -21,6 +21,8 @@ package gregapi.compat.galacticraft;
 
 import static gregapi.data.CS.*;
 
+import net.minecraftforge.common.MinecraftForge;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import gregapi.compat.CompatBase;
 import gregapi.worldgen.GT6WorldGenerator;
@@ -31,24 +33,30 @@ import micdoodle8.mods.galacticraft.api.power.IEnergyHandlerGC;
 import micdoodle8.mods.galacticraft.api.transmission.NetworkType;
 import micdoodle8.mods.galacticraft.api.transmission.tile.IConnector;
 import micdoodle8.mods.galacticraft.core.energy.EnergyConfigHandler;
-import net.minecraftforge.common.MinecraftForge;
 
 public class CompatGC extends CompatBase implements ICompatGC {
-	public final EnergySourceAdjacent[] ENERGY_DIR = {new EnergySourceAdjacent(FORGE_DIR[0]), new EnergySourceAdjacent(FORGE_DIR[1]), new EnergySourceAdjacent(FORGE_DIR[2]), new EnergySourceAdjacent(FORGE_DIR[3]), new EnergySourceAdjacent(FORGE_DIR[4]), new EnergySourceAdjacent(FORGE_DIR[5]), new EnergySourceAdjacent(FORGE_DIR[6])};
-	
-	public CompatGC() {
-		NetworkType.POWER.toString();
-		IConnector.class.getCanonicalName();
-		IEnergyHandlerGC.class.getCanonicalName();
-		EnergySource.EnergySourceAdjacent.class.getCanonicalName();
-		EnergyConfigHandler.class.getCanonicalName();
-		MinecraftForge.EVENT_BUS.register(this);
-	}
-	
-	@Override public Object dir(byte aSide) {return ENERGY_DIR[aSide];}
-	
-	@SubscribeEvent
-	public void populate(GCCoreEventPopulate.Post aEvent) {
-		GT6WorldGenerator.generate(aEvent.worldObj, aEvent.chunkX, aEvent.chunkZ, T);
-	}
+
+    public final EnergySourceAdjacent[] ENERGY_DIR = { new EnergySourceAdjacent(FORGE_DIR[0]),
+        new EnergySourceAdjacent(FORGE_DIR[1]), new EnergySourceAdjacent(FORGE_DIR[2]),
+        new EnergySourceAdjacent(FORGE_DIR[3]), new EnergySourceAdjacent(FORGE_DIR[4]),
+        new EnergySourceAdjacent(FORGE_DIR[5]), new EnergySourceAdjacent(FORGE_DIR[6]) };
+
+    public CompatGC() {
+        NetworkType.POWER.toString();
+        IConnector.class.getCanonicalName();
+        IEnergyHandlerGC.class.getCanonicalName();
+        EnergySource.EnergySourceAdjacent.class.getCanonicalName();
+        EnergyConfigHandler.class.getCanonicalName();
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @Override
+    public Object dir(byte aSide) {
+        return ENERGY_DIR[aSide];
+    }
+
+    @SubscribeEvent
+    public void populate(GCCoreEventPopulate.Post aEvent) {
+        GT6WorldGenerator.generate(aEvent.worldObj, aEvent.chunkX, aEvent.chunkZ, T);
+    }
 }

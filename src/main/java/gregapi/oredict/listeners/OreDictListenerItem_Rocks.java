@@ -19,6 +19,8 @@
 
 package gregapi.oredict.listeners;
 
+import net.minecraft.item.ItemStack;
+
 import gregapi.data.ANY;
 import gregapi.data.LH;
 import gregapi.data.MT;
@@ -27,18 +29,26 @@ import gregapi.lang.LanguageHandler;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.oredict.OreDictPrefix;
 import gregapi.oredict.listeners.IOreDictListenerItem.OreDictListenerItem;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author Gregorius Techneticies
  */
 public class OreDictListenerItem_Rocks extends OreDictListenerItem {
-	public OreDictListenerItem_Rocks() {
-		LH.add("gt.behaviour.rocks", "Indicates occurence of ");
-	}
-	
-	@Override
-	public String getListenerToolTip(OreDictPrefix aPrefix, OreDictMaterial aMaterial, ItemStack aStack) {
-		return aMaterial == MT.MeteoricIron || aMaterial == MT.Meteorite || aMaterial == MT.AncientDebris || aMaterial == MT.Obsidian || aMaterial == MT.Ambrosium || ANY.Glowstone.mToThis.contains(aMaterial) ? null : LanguageHandler.translate("gt.behaviour.rocks", "Indicates occurence of ") + (aMaterial.contains(TD.Properties.STONE)?LH.Chat.WHITE:LH.Chat.YELLOW) + aMaterial.mNameLocal;
-	}
+
+    public OreDictListenerItem_Rocks() {
+        LH.add("gt.behaviour.rocks", "Indicates occurence of ");
+    }
+
+    @Override
+    public String getListenerToolTip(OreDictPrefix aPrefix, OreDictMaterial aMaterial, ItemStack aStack) {
+        return aMaterial == MT.MeteoricIron || aMaterial == MT.Meteorite
+            || aMaterial == MT.AncientDebris
+            || aMaterial == MT.Obsidian
+            || aMaterial == MT.Ambrosium
+            || ANY.Glowstone.mToThis.contains(aMaterial)
+                ? null
+                : LanguageHandler.translate("gt.behaviour.rocks", "Indicates occurence of ")
+                    + (aMaterial.contains(TD.Properties.STONE) ? LH.Chat.WHITE : LH.Chat.YELLOW)
+                    + aMaterial.mNameLocal;
+    }
 }

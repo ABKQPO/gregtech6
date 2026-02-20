@@ -19,26 +19,32 @@
 
 package gregapi.item.prefixitem;
 
+import net.minecraft.item.ItemStack;
+
 import baubles.api.BaubleType;
 import cpw.mods.fml.common.Optional;
 import gregapi.code.ModData;
 import gregapi.data.CS.ModIDs;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.oredict.OreDictPrefix;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author Gregorius Techneticies
  */
 public class PrefixItemRing extends PrefixItemBauble {
-	public PrefixItemRing(ModData aMod, String aNameInternal, OreDictPrefix aPrefix) {
-		this(aMod.mID, aMod.mID, aNameInternal, aPrefix, OreDictMaterial.MATERIAL_ARRAY);
-	}
-	
-	public PrefixItemRing(String aModIDOwner, String aModIDTextures, String aNameInternal, OreDictPrefix aPrefix, OreDictMaterial... aMaterialList) {
-		super(aModIDOwner, aModIDTextures, aNameInternal, aPrefix, aMaterialList);
-	}
-	
-	@Optional.Method(modid = ModIDs.BAUBLES)
-	@Override public BaubleType getBaubleType(ItemStack aStack) {return BaubleType.RING;}
+
+    public PrefixItemRing(ModData aMod, String aNameInternal, OreDictPrefix aPrefix) {
+        this(aMod.mID, aMod.mID, aNameInternal, aPrefix, OreDictMaterial.MATERIAL_ARRAY);
+    }
+
+    public PrefixItemRing(String aModIDOwner, String aModIDTextures, String aNameInternal, OreDictPrefix aPrefix,
+        OreDictMaterial... aMaterialList) {
+        super(aModIDOwner, aModIDTextures, aNameInternal, aPrefix, aMaterialList);
+    }
+
+    @Optional.Method(modid = ModIDs.BAUBLES)
+    @Override
+    public BaubleType getBaubleType(ItemStack aStack) {
+        return BaubleType.RING;
+    }
 }

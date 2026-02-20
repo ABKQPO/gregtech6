@@ -25,17 +25,20 @@ import gregapi.api.Abstract_Mod;
 import gregapi.code.ModData;
 
 public abstract class CompatMods extends CompatBase {
-	public final ModData mMod;
-	
-	public CompatMods(ModData aMod) {
-		this(aMod, GAPI_POST);
-	}
-	public CompatMods(ModData aMod, Abstract_Mod aGTMod) {
-		mMod = aMod;
-		if (mMod.mLoaded) aGTMod.mCompatClasses.add(this);
-	}
-	@Override
-	public String toString() {
-		return mMod.mName;
-	}
+
+    public final ModData mMod;
+
+    public CompatMods(ModData aMod) {
+        this(aMod, GAPI_POST);
+    }
+
+    public CompatMods(ModData aMod, Abstract_Mod aGTMod) {
+        mMod = aMod;
+        if (mMod.mLoaded) aGTMod.mCompatClasses.add(this);
+    }
+
+    @Override
+    public String toString() {
+        return mMod.mName;
+    }
 }

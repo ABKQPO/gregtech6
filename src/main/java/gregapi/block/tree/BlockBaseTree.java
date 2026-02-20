@@ -21,39 +21,59 @@ package gregapi.block.tree;
 
 import static gregapi.data.CS.*;
 
-import gregapi.block.BlockBaseMeta;
-import gregapi.data.MD;
-import gregapi.render.IIconContainer;
-import gregapi.util.ST;
-import mods.railcraft.common.carts.EntityTunnelBore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.world.World;
 
+import gregapi.block.BlockBaseMeta;
+import gregapi.data.MD;
+import gregapi.render.IIconContainer;
+import gregapi.util.ST;
+import mods.railcraft.common.carts.EntityTunnelBore;
+
 /**
  * @author Gregorius Techneticies
  */
 public abstract class BlockBaseTree extends BlockBaseMeta {
-	public BlockBaseTree(Class<? extends ItemBlock> aItemClass, String aNameInternal, Material aMaterial, SoundType aSoundType, long aMaxMeta, IIconContainer[] aIcons) {
-		super(aItemClass, aNameInternal, aMaterial, aSoundType, aMaxMeta, aIcons);
-		if (MD.RC.mLoaded) try {EntityTunnelBore.addMineableBlock(this);} catch(Throwable e) {e.printStackTrace(ERR);}
-		if (COMPAT_FR != null) COMPAT_FR.addToBackpacks("forester", ST.make(this, 1, W));
-	}
-	
-	public abstract int getLeavesRangeSide(byte aMeta);
-	public abstract int getLeavesRangeYPos(byte aMeta);
-	public abstract int getLeavesRangeYNeg(byte aMeta);
-	
-	@Override
-	public void breakBlock(World aWorld, int aX, int aY, int aZ, Block aBlock, int aMeta) {
-		int tRangeSide = getLeavesRangeSide((byte)aMeta)+1, tRangeYNeg = getLeavesRangeYNeg((byte)aMeta)+1, tRangeYPos = getLeavesRangeYPos((byte)aMeta)+1;
-		if (!aWorld.isRemote && aWorld.checkChunksExist(aX - tRangeSide, aY - tRangeYNeg, aZ - tRangeSide, aX + tRangeSide, aY + tRangeYPos, aZ + tRangeSide)) {
-			tRangeSide--; tRangeYNeg--; tRangeYPos--;
-			for (int i = -tRangeSide; i <= tRangeSide; ++i) for (int j = -tRangeYNeg; j <= tRangeYPos; ++j) for (int k = -tRangeSide; k <= tRangeSide; ++k) {
-				Block tBlock = aWorld.getBlock(aX + i, aY + j, aZ + k);
-				if (tBlock.isLeaves(aWorld, aX + i, aY + j, aZ + k)) tBlock.beginLeavesDecay(aWorld, aX + i, aY + j, aZ + k);
-			}
-		}
-	}
+
+    public BlockBaseTree(Class<? extends ItemBlock> aItemClass, String aNameInternal, Material aMaterial,
+        SoundType aSoundType, long aMaxMeta, IIconContainer[] aIcons) {
+        super(aItemClass, aNameInternal, aMaterial, aSoundType, aMaxMeta, aIcons);
+        if (MD.RC.mLoaded) try {
+            EntityTunnelBore.addMineableBlock(this);
+        } catch (Throwable e) {
+            e.printStackTrace(ERR);
+        }
+        if (COMPAT_FR != null) COMPAT_FR.addToBackpacks("forester", ST.make(this, 1, W));
+    }
+
+    public abstract int getLeavesRangeSide(byte aMeta);
+
+    public abstract int getLeavesRangeYPos(byte aMeta);
+
+    public abstract int getLeavesRangeYNeg(byte aMeta);
+
+    @Override
+    public void breakBlock(World aWorld, int aX, int aY, int aZ, Block aBlock, int aMeta) {
+        int tRangeSide = getLeavesRangeSide((byte) aMeta) + 1, tRangeYNeg = getLeavesRangeYNeg((byte) aMeta) + 1,
+            tRangeYPos = getLeavesRangeYPos((byte) aMeta) + 1;
+        if (!aWorld.isRemote && aWorld.checkChunksExist(
+            aX - tRangeSide,
+            aY - tRangeYNeg,
+            aZ - tRangeSide,
+            aX + tRangeSide,
+            aY + tRangeYPos,
+            aZ + tRangeSide)) {
+            tRangeSide--;
+            tRangeYNeg--;
+            tRangeYPos--;
+            for (int i = -tRangeSide; i <= tRangeSide; ++i)
+                for (int j = -tRangeYNeg; j <= tRangeYPos; ++j) for (int k = -tRangeSide; k <= tRangeSide; ++k) {
+                    Block tBlock = aWorld.getBlock(aX + i, aY + j, aZ + k);
+                    if (tBlock.isLeaves(aWorld, aX + i, aY + j, aZ + k))
+                        tBlock.beginLeavesDecay(aWorld, aX + i, aY + j, aZ + k);
+                }
+        }
+    }
 }

@@ -19,6 +19,13 @@
 
 package gregapi.compat.opencomputers;
 
+import static gregapi.data.CS.F;
+import static gregapi.data.CS.SIDES_VALID;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import gregapi.compat.CompatBase;
 import gregapi.computer.IComputerizable;
@@ -32,37 +39,36 @@ import gregapi.util.WD;
 import li.cil.oc.api.Driver;
 import li.cil.oc.api.driver.SidedBlock;
 import li.cil.oc.api.network.ManagedEnvironment;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import static gregapi.data.CS.F;
-import static gregapi.data.CS.SIDES_VALID;
 
 public class CompatOC extends CompatBase implements ICompatOC, SidedBlock {
-	public CompatOC() {/**/}
-	
-	@Override
-	public void onLoad(FMLInitializationEvent event) {
-		Driver.add(this);
-	}
-	
-	@Override
-	public boolean worksWith(World aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {
-		return findPeripheral(aWorld, aX, aY, aZ, aSide) != null;
-	}
-	
-	@Override
-	public ManagedEnvironment createEnvironment(World aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {
-		return new EnvironmentOC(findPeripheral(aWorld, aX, aY, aZ, aSide), WD.te(aWorld, aX, aY, aZ, UT.Code.side(aSide), F));
-	}
-	
-	public IComputerizable findPeripheral(World aWorld, int aX, int aY, int aZ, ForgeDirection side) {
-		DelegatorTileEntity<TileEntity> tDelegator = WD.te(aWorld, aX, aY, aZ, UT.Code.side(side), F);
-		if (SIDES_VALID[tDelegator.mSideOfTileEntity] && tDelegator.mTileEntity instanceof ITileEntityCoverable) {
-			CoverData tData = ((ITileEntityCoverable)tDelegator.mTileEntity).getCoverData();
-			if (tData != null && tData.mBehaviours[tDelegator.mSideOfTileEntity] instanceof ICoverComputerizable) return (IComputerizable)tData.mBehaviours[tDelegator.mSideOfTileEntity];
-		}
-		return tDelegator.mTileEntity instanceof ITileEntityComputerizable ? (IComputerizable)tDelegator.mTileEntity : null;
-	}
+
+    public CompatOC() {/**/}
+
+    @Override
+    public void onLoad(FMLInitializationEvent event) {
+        Driver.add(this);
+    }
+
+    @Override
+    public boolean worksWith(World aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {
+        return findPeripheral(aWorld, aX, aY, aZ, aSide) != null;
+    }
+
+    @Override
+    public ManagedEnvironment createEnvironment(World aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {
+        return new EnvironmentOC(
+            findPeripheral(aWorld, aX, aY, aZ, aSide),
+            WD.te(aWorld, aX, aY, aZ, UT.Code.side(aSide), F));
+    }
+
+    public IComputerizable findPeripheral(World aWorld, int aX, int aY, int aZ, ForgeDirection side) {
+        DelegatorTileEntity<TileEntity> tDelegator = WD.te(aWorld, aX, aY, aZ, UT.Code.side(side), F);
+        if (SIDES_VALID[tDelegator.mSideOfTileEntity] && tDelegator.mTileEntity instanceof ITileEntityCoverable) {
+            CoverData tData = ((ITileEntityCoverable) tDelegator.mTileEntity).getCoverData();
+            if (tData != null && tData.mBehaviours[tDelegator.mSideOfTileEntity] instanceof ICoverComputerizable)
+                return (IComputerizable) tData.mBehaviours[tDelegator.mSideOfTileEntity];
+        }
+        return tDelegator.mTileEntity instanceof ITileEntityComputerizable ? (IComputerizable) tDelegator.mTileEntity
+            : null;
+    }
 }

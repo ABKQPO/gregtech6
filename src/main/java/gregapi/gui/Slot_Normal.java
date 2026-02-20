@@ -19,17 +19,24 @@
 
 package gregapi.gui;
 
+import net.minecraft.item.ItemStack;
+
 import gregapi.tileentity.ITileEntityInventoryGUI;
 import gregapi.util.ST;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author Gregorius Techneticies
  */
 public class Slot_Normal extends Slot_Base {
-	public Slot_Normal(ITileEntityInventoryGUI aInventory, int aIndex, int aX, int aY) {
-		super(aInventory, aIndex, aX, aY);
-	}
-	
-	@Override public void putStack(ItemStack aStack) {if (ST.size(aStack) > 64) ST.size_(64, aStack); mInventory.setInventorySlotContentsGUI(mIndex, aStack); onSlotChanged();}
+
+    public Slot_Normal(ITileEntityInventoryGUI aInventory, int aIndex, int aX, int aY) {
+        super(aInventory, aIndex, aX, aY);
+    }
+
+    @Override
+    public void putStack(ItemStack aStack) {
+        if (ST.size(aStack) > 64) ST.size_(64, aStack);
+        mInventory.setInventorySlotContentsGUI(mIndex, aStack);
+        onSlotChanged();
+    }
 }

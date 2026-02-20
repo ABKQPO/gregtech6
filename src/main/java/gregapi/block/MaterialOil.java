@@ -25,16 +25,32 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.MaterialLiquid;
 
 public class MaterialOil extends MaterialLiquid {
-	public static MaterialOil instance = new MaterialOil();
-	
-	private MaterialOil() {
-		super(MapColor.blackColor);
-		setNoPushMobility();
-		setReplaceable();
-	}
-	
-	@Override public boolean isOpaque() {return F;}
-	@Override public boolean isLiquid() {return T;}
-	@Override public boolean isSolid() {return F;}
-	@Override public boolean blocksMovement() {return F;}
+
+    public static MaterialOil instance = new MaterialOil();
+
+    private MaterialOil() {
+        super(MapColor.blackColor);
+        setNoPushMobility();
+        setReplaceable();
+    }
+
+    @Override
+    public boolean isOpaque() {
+        return F;
+    }
+
+    @Override
+    public boolean isLiquid() {
+        return T;
+    }
+
+    @Override
+    public boolean isSolid() {
+        return F;
+    }
+
+    @Override
+    public boolean blocksMovement() {
+        return F;
+    }
 }

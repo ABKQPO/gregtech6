@@ -21,21 +21,35 @@ package gregapi.block.tree;
 
 import static gregapi.data.CS.*;
 
-import gregapi.render.IIconContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import gregapi.render.IIconContainer;
+
 /**
  * @author Gregorius Techneticies
  */
 public abstract class BlockBaseBeamFlammable extends BlockBaseBeam {
-	public BlockBaseBeamFlammable(Class<? extends ItemBlock> aItemClass, String aNameInternal, Material aMaterial, SoundType aSoundType, long aMaxMeta, IIconContainer[] aIcons) {
-		super(aItemClass, aNameInternal, aMaterial, aSoundType, Math.min(4, aMaxMeta), aIcons);
-	}
-	
-	@Override public boolean isFireSource(World aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {return F;}
-	@Override public int getFlammability(byte aMeta) {return 5;}
-	@Override public int getFireSpreadSpeed(byte aMeta) {return 5;}
+
+    public BlockBaseBeamFlammable(Class<? extends ItemBlock> aItemClass, String aNameInternal, Material aMaterial,
+        SoundType aSoundType, long aMaxMeta, IIconContainer[] aIcons) {
+        super(aItemClass, aNameInternal, aMaterial, aSoundType, Math.min(4, aMaxMeta), aIcons);
+    }
+
+    @Override
+    public boolean isFireSource(World aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {
+        return F;
+    }
+
+    @Override
+    public int getFlammability(byte aMeta) {
+        return 5;
+    }
+
+    @Override
+    public int getFireSpreadSpeed(byte aMeta) {
+        return 5;
+    }
 }

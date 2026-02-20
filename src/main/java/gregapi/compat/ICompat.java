@@ -19,21 +19,28 @@
 
 package gregapi.compat;
 
+import java.util.Collection;
+
 import cpw.mods.fml.common.event.*;
 import gregapi.code.ArrayListNoNulls;
 
-import java.util.Collection;
-
-
 public interface ICompat {
-	public static final Collection<ICompat> COMPAT_CLASSES = new ArrayListNoNulls<>();
-	
-	public void onPreLoad       (FMLPreInitializationEvent aEvent);
-	public void onLoad          (FMLInitializationEvent aEvent);
-	public void onPostLoad      (FMLPostInitializationEvent aEvent);
-	public void onServerStarting(FMLServerStartingEvent aEvent);
-	public void onServerStarted (FMLServerStartedEvent aEvent);
-	public void onServerStopping(FMLServerStoppingEvent aEvent);
-	public void onServerStopped (FMLServerStoppedEvent aEvent);
-	public void onIDChanging    (FMLModIdMappingEvent aEvent);
+
+    public static final Collection<ICompat> COMPAT_CLASSES = new ArrayListNoNulls<>();
+
+    public void onPreLoad(FMLPreInitializationEvent aEvent);
+
+    public void onLoad(FMLInitializationEvent aEvent);
+
+    public void onPostLoad(FMLPostInitializationEvent aEvent);
+
+    public void onServerStarting(FMLServerStartingEvent aEvent);
+
+    public void onServerStarted(FMLServerStartedEvent aEvent);
+
+    public void onServerStopping(FMLServerStoppingEvent aEvent);
+
+    public void onServerStopped(FMLServerStoppedEvent aEvent);
+
+    public void onIDChanging(FMLModIdMappingEvent aEvent);
 }

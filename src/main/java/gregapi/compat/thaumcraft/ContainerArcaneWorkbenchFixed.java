@@ -21,37 +21,49 @@ package gregapi.compat.thaumcraft;
 
 import static gregapi.data.CS.*;
 
-import gregapi.util.CR;
-import gregapi.util.ST;
-import gregapi.util.UT;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
+
+import gregapi.util.CR;
+import gregapi.util.ST;
+import gregapi.util.UT;
 import thaumcraft.common.container.ContainerArcaneWorkbench;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
 import thaumcraft.common.tiles.TileArcaneWorkbench;
 
 @Deprecated
-/** Was a bad Idea that does not work well. It works but the GUI loses persistence and Item dupes may randomly happen. */
+/**
+ * Was a bad Idea that does not work well. It works but the GUI loses persistence and Item dupes may randomly happen.
+ */
 public class ContainerArcaneWorkbenchFixed extends ContainerArcaneWorkbench {
-	public TileArcaneWorkbench mTileEntity;
-	public InventoryPlayer mInventoryPlayer;
-	
-	public ContainerArcaneWorkbenchFixed(ContainerArcaneWorkbench aOriginal) {
-		super((InventoryPlayer)UT.Reflection.getFieldContent(aOriginal, "ip"), (TileArcaneWorkbench)UT.Reflection.getFieldContent(aOriginal, "tileEntity"));
-		mInventoryPlayer = (InventoryPlayer)UT.Reflection.getFieldContent(aOriginal, "ip");
-		mTileEntity  = (TileArcaneWorkbench)UT.Reflection.getFieldContent(aOriginal, "tileEntity");
-		onCraftMatrixChanged(mTileEntity);
-	}
-	
-	@Override
-	public void onCraftMatrixChanged(IInventory aInventory) {
-		if (mInventoryPlayer == null || mTileEntity == null) return;
-		mTileEntity.setInventorySlotContentsSoftly(9, CR.getany(mTileEntity.getWorldObj(), mTileEntity.stackList));
-		Item tWand = ST.item(mTileEntity.getStackInSlot(10));
-		if (tWand instanceof ItemWandCasting && ((ItemWandCasting)tWand).consumeAllVisCrafting(mTileEntity.getStackInSlot(10), mInventoryPlayer.player, ThaumcraftCraftingManager.findMatchingArcaneRecipeAspects(mTileEntity, mInventoryPlayer.player), F)) {
-			mTileEntity.setInventorySlotContentsSoftly(9, ThaumcraftCraftingManager.findMatchingArcaneRecipe(mTileEntity, mInventoryPlayer.player));
-		}
-	}
+
+    public TileArcaneWorkbench mTileEntity;
+    public InventoryPlayer mInventoryPlayer;
+
+    public ContainerArcaneWorkbenchFixed(ContainerArcaneWorkbench aOriginal) {
+        super(
+            (InventoryPlayer) UT.Reflection.getFieldContent(aOriginal, "ip"),
+            (TileArcaneWorkbench) UT.Reflection.getFieldContent(aOriginal, "tileEntity"));
+        mInventoryPlayer = (InventoryPlayer) UT.Reflection.getFieldContent(aOriginal, "ip");
+        mTileEntity = (TileArcaneWorkbench) UT.Reflection.getFieldContent(aOriginal, "tileEntity");
+        onCraftMatrixChanged(mTileEntity);
+    }
+
+    @Override
+    public void onCraftMatrixChanged(IInventory aInventory) {
+        if (mInventoryPlayer == null || mTileEntity == null) return;
+        mTileEntity.setInventorySlotContentsSoftly(9, CR.getany(mTileEntity.getWorldObj(), mTileEntity.stackList));
+        Item tWand = ST.item(mTileEntity.getStackInSlot(10));
+        if (tWand instanceof ItemWandCasting && ((ItemWandCasting) tWand).consumeAllVisCrafting(
+            mTileEntity.getStackInSlot(10),
+            mInventoryPlayer.player,
+            ThaumcraftCraftingManager.findMatchingArcaneRecipeAspects(mTileEntity, mInventoryPlayer.player),
+            F)) {
+            mTileEntity.setInventorySlotContentsSoftly(
+                9,
+                ThaumcraftCraftingManager.findMatchingArcaneRecipe(mTileEntity, mInventoryPlayer.player));
+        }
+    }
 }

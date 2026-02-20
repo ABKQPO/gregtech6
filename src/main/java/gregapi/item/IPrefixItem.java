@@ -26,5 +26,5 @@ import gregapi.oredict.IOreDictOptimizedParsingItem;
  * @author Gregorius Techneticies
  */
 public interface IPrefixItem extends IOreDictOptimizedParsingItem, IOreDictItemDataOverrideItem {
-	/** Empty Compound Interface flagging an Item as GregTech Prefix Item. */
+    /** Empty Compound Interface flagging an Item as GregTech Prefix Item. */
 }
