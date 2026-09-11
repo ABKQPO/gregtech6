@@ -2518,10 +2518,7 @@ public class Loader_Worldgen implements Runnable {
             6,
             GEN_FLOOR);
         new WorldgenOresBedrock("ore.bedrock.copper", T, T, 16000, MT.Cu, BlocksGT.FlowersB, 3, GEN_FLOOR);
-        new WorldgenOresBedrock("ore.bedrock.monazite", T, T, 16000, MT.Monazite, BlocksGT.FlowersA, 7, GEN_FLOOR); // TODO
-                                                                                                                    // Rare
-                                                                                                                    // Earth
-                                                                                                                    // Flower
+        new WorldgenOresBedrock("ore.bedrock.monazite", T, T, 16000, MT.Monazite, BlocksGT.FlowersA, 9, GEN_FLOOR);
         new WorldgenOresBedrock(
             "ore.bedrock.powellite",
             T,
@@ -2538,8 +2535,8 @@ public class Loader_Worldgen implements Runnable {
             8000,
             MT.OREMATS.Bastnasite,
             BlocksGT.FlowersA,
-            7,
-            GEN_FLOOR); // TODO Rare Earth Flower
+            9,
+            GEN_FLOOR);
         new WorldgenOresBedrock(
             "ore.bedrock.stibnite",
             T,
@@ -3690,6 +3687,38 @@ public class Loader_Worldgen implements Runnable {
             20,
             16,
             MT.Redstone,
+            GEN_OVERWORLD,
+            GEN_GT,
+            GEN_PFAA,
+            GEN_A97,
+            GEN_A97_GT,
+            GEN_ENVM,
+            GEN_ENVM_GT,
+            GEN_CW2_AquaCavern,
+            GEN_CW2_AquaCavern_GT,
+            GEN_CW2_Caveland,
+            GEN_CW2_Caveland_GT,
+            GEN_CW2_Cavenia,
+            GEN_CW2_Cavenia_GT,
+            GEN_CW2_Cavern,
+            GEN_CW2_Cavern_GT,
+            GEN_CW2_Caveworld,
+            GEN_CW2_Caveworld_GT,
+            GEN_EREBUS,
+            GEN_BETWEENLANDS,
+            GEN_ATUM,
+            GEN_ALFHEIM,
+            GEN_AETHER,
+            GEN_NETHER,
+            GEN_MARS,
+            GEN_PLANETS);
+        new WorldgenOresSmall(
+            "ore.small.redcinnabar",
+            T,
+            5,
+            20,
+            4,
+            MT.OREMATS.Cinnabar,
             GEN_OVERWORLD,
             GEN_GT,
             GEN_PFAA,

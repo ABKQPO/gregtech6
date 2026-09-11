@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025 GregTech-6 Team
+ * Copyright (c) 2026 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -1517,14 +1517,14 @@ public class Loader_Recipes_Other implements Runnable {
                 FL.Mana_TE.make(5),
                 NF,
                 ST.make(Blocks.redstone_block, 1, 0));
-            RM.Bath.addRecipe1(
-                T,
-                0,
-                16,
-                ST.make(Blocks.lit_redstone_ore, 1, W),
-                FL.Mana_TE.make(5),
-                NF,
-                ST.make(Blocks.redstone_block, 1, 0));
+            // RM.Bath.addRecipe1(
+            // T,
+            // 0,
+            // 16,
+            // ST.make(Blocks.lit_redstone_ore, 1, W),
+            // FL.Mana_TE.make(5),
+            // NF,
+            // ST.make(Blocks.redstone_block, 1, 0));
         }
 
         RM.Bath.addRecipe2(

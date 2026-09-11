@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025 GregTech-6 Team
+ * Copyright (c) 2026 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -56,9 +56,11 @@ public class MultiTileEntityCertificate extends TileEntityBase09FacingSingle imp
     IMTE_SetBlockBoundsBasedOnState, IMTE_GetCollisionBoundingBoxFromPool, IMTE_GetSelectedBoundingBoxFromPool {
 
     public static final ArrayListNoNulls<String> ALREADY_RECEIVED = new ArrayListNoNulls<>();
+    public static int ALREADY_RECEIVED_SIZE = 0;
 
     @Override
     public void onServerSave(File aSaveLocation) {
+        if (ALREADY_RECEIVED.size() == ALREADY_RECEIVED_SIZE) return;
         File aTargetFile = new File(new File(aSaveLocation, "gregtech6"), "certificates.support.dat");
         if (!aTargetFile.exists()) {
             try {
@@ -74,11 +76,13 @@ public class MultiTileEntityCertificate extends TileEntityBase09FacingSingle imp
         } catch (Throwable e) {
             e.printStackTrace(ERR);
         }
+        ALREADY_RECEIVED_SIZE = ALREADY_RECEIVED.size();
     }
 
     @Override
     public void onServerLoad(File aSaveLocation) {
         ALREADY_RECEIVED.clear();
+        ALREADY_RECEIVED_SIZE = 0;
         File aTargetFile = new File(new File(aSaveLocation, "gregtech6"), "certificates.support.dat");
         if (aTargetFile.exists()) {
             NBTTagCompound aNBT = null;
@@ -89,7 +93,8 @@ public class MultiTileEntityCertificate extends TileEntityBase09FacingSingle imp
             }
             if (aNBT != null) for (int i = 0; i < Integer.MAX_VALUE; i++) {
                 if (!aNBT.hasKey("" + i)) break;
-                ALREADY_RECEIVED.add(aNBT.getString("" + i));
+                String tString = aNBT.getString("" + i);
+                if (!ALREADY_RECEIVED.contains(tString)) ALREADY_RECEIVED.add(tString);
             }
         }
     }
@@ -117,8 +122,8 @@ public class MultiTileEntityCertificate extends TileEntityBase09FacingSingle imp
         super.readFromNBT2(aNBT);
         String tName = getCustomName();
         if (UT.Code.stringValid(tName)) {
-            ALREADY_RECEIVED.add(tName);
-            ALREADY_RECEIVED.add(tName.toLowerCase());
+            if (!ALREADY_RECEIVED.contains(tName)) ALREADY_RECEIVED.add(tName);
+            if (!ALREADY_RECEIVED.contains(tName.toLowerCase())) ALREADY_RECEIVED.add(tName.toLowerCase());
             mGold = GT6_Main.gt_proxy.mSupporterListGold.contains(tName.toLowerCase());
             mSilver = GT6_Main.gt_proxy.mSupporterListSilver.contains(tName.toLowerCase());
         }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023 GregTech-6 Team
+ * Copyright (c) 2026 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -39,7 +39,7 @@ import gregapi.util.ST;
 public class BlockFlowersA extends BlockBaseFlower implements Runnable {
 
     public BlockFlowersA(String aUnlocalised) {
-        super(null, aUnlocalised, 9, Textures.BlockIcons.FLOWERS_A);
+        super(null, aUnlocalised, 10, Textures.BlockIcons.FLOWERS_A);
         LH.add(getUnlocalizedName() + ".0", "Altered Andesite Buckwheat"); // Gold, Silver
         LH.add(getUnlocalizedName() + ".1", "Crosby Buckwheat"); // Gold, Silver, Sulfur
         LH.add(getUnlocalizedName() + ".2", "Alpine Catchfly"); // Copper
@@ -49,6 +49,7 @@ public class BlockFlowersA extends BlockBaseFlower implements Runnable {
         LH.add(getUnlocalizedName() + ".6", "Narcissus Sheldonia"); // Cooperite
         LH.add(getUnlocalizedName() + ".7", "Orechid"); // Any Random Ore that doesn't have a specific Flower
         LH.add(getUnlocalizedName() + ".8", "Hexalily"); // Hexorium
+        LH.add(getUnlocalizedName() + ".9", "Vindicator Flower"); // Rare Earth
 
         GT.mBeforePostInit.add(this);
         BlocksGT.FLOWERS.add(this);
@@ -96,7 +97,7 @@ public class BlockFlowersA extends BlockBaseFlower implements Runnable {
                 aList.add("Indicates presence of a Hexorium Deposit nearby");
                 break;
             case 9:
-                aList.add("Indicates presence of some Ore Deposit nearby");
+                aList.add("Vindicates presence of a Rare Earth Deposit nearby");
                 break;
             case 10:
                 aList.add("Indicates presence of some Ore Deposit nearby");

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025 GregTech-6 Team
+ * Copyright (c) 2026 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -41156,6 +41156,34 @@ public class Loader_MultiTileEntities implements Runnable {
             Items.comparator,
             'X',
             OP.gem.dat(ANY.SiO2));
+        CR.shapeless(aRegistry.getItem(), CR.DEF_NCC, new Object[] { aRegistry.getItem() });
+        aRegistry.add(
+            "Kilo-Gibbl-O-Meter Sensor",
+            "Sensors",
+            31023,
+            31015,
+            MultiTileEntityKiloGibblometer.class,
+            1,
+            16,
+            aUtilMetal,
+            null,
+            "WPW",
+            "BXB",
+            "WPW",
+            'P',
+            OP.plateDouble.dat(MT.TinAlloy),
+            'W',
+            OP.wireFine.dat(MT.RedAlloy),
+            'R',
+            OD.itemRedstone,
+            'G',
+            OD.blockGlassColorless,
+            'B',
+            OP.bolt.dat(MT.TinAlloy),
+            'C',
+            Items.comparator,
+            'X',
+            OP.gem.dat(ANY.Diamond));
         CR.shapeless(aRegistry.getItem(), CR.DEF_NCC, new Object[] { aRegistry.getItem() });
         aRegistry.add(
             "Item-O-Meter Sensor",

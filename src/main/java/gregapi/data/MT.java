@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025 GregTech-6 Team
+ * Copyright (c) 2026 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -5813,6 +5813,12 @@ public class MT {
                         OM.stack(Ag, 1 * U),
                         OM.stack(tMat, 4 * U)));
             }
+            ElectrumFlux.addAlloyingRecipe(
+                new OreDictConfigurationComponent(
+                    2,
+                    OM.stack(InductiveAlloy, 2 * U),
+                    OM.stack(Ag, 1 * U),
+                    OM.stack(Redstone, 3 * U)));
             Ultimet.addAlloyingRecipe(
                 new OreDictConfigurationComponent(
                     36,
