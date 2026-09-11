@@ -28,6 +28,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import gregapi.code.ArrayListNoNulls;
 import gregapi.code.TagData;
 import gregapi.item.IItemEnergy;
 import gregapi.item.IItemGTContainerTool;
@@ -43,6 +44,13 @@ public class AdvancedCraftingShaped extends ShapedOreRecipe implements ICrafting
     public final boolean mDismantleable, mRemovableByGT, mAutoCraftable, mKeepingNBT;
     private final Enchantment[] mEnchantmentsAdded;
     private final int[] mEnchantmentLevelsAdded;
+    /**
+     * The 3x3 Grids this Recipe can occupy, as BitSets, mirroring and all Offsets included. Null when the Recipe has
+     * no Shape to compare against, an empty Array when it can never fit.
+     */
+    private final int[] mShapeMasks;
+    /** How many Slots this Recipe fills, which is the cheapest way to reject a Grid that cannot match. */
+    private final int mShapeSize;
 
     public AdvancedCraftingShaped(ItemStack aResult, boolean aDismantleAble, boolean aRemovableByGT,
         boolean aKeepingNBT, boolean aAutoCraftable, Enchantment[] aEnchantmentsAdded, int[] aEnchantmentLevelsAdded,
@@ -54,10 +62,13 @@ public class AdvancedCraftingShaped extends ShapedOreRecipe implements ICrafting
         mKeepingNBT = aKeepingNBT;
         mDismantleable = aDismantleAble;
         mAutoCraftable = aAutoCraftable;
+        mShapeMasks = shapeMasks(shape(aRecipe));
+        mShapeSize = mShapeMasks == null || mShapeMasks.length == 0 ? -1 : Integer.bitCount(mShapeMasks[0]);
     }
 
     @Override
     public boolean matches(InventoryCrafting aGrid, World aWorld) {
+        if (!canFit(aGrid)) return F;
         if (mKeepingNBT) {
             ItemStack tStack = null;
             for (int i = 0; i < aGrid.getSizeInventory(); i++) {
@@ -151,5 +162,72 @@ public class AdvancedCraftingShaped extends ShapedOreRecipe implements ICrafting
     @Override
     public boolean isAutocraftableByGT() {
         return mAutoCraftable;
+    }
+
+    /**
+     * Rejects a Grid that cannot possibly match this Recipe before the inherited matching walks the OreDictionary
+     * Lists of every Ingredient.
+     * <p>
+     * This matters a lot more than it looks: anything that scans the Crafting Recipe List, most notably the Ore
+     * Processing of GregTech 5, calls this for every Recipe in it, and a Grid that is probed with one single Item
+     * would otherwise make every Recipe with an OreDictionary Ingredient iterate that whole List for every Slot.
+     */
+    private boolean canFit(InventoryCrafting aGrid) {
+        if (mShapeMasks == null) return T;
+        if (mShapeMasks.length == 0) return F;
+        if (aGrid.getSizeInventory() != 9) return T;
+        int tGrid = 0, tGridSize = 0;
+        for (int i = 0; i < 9; i++) if (aGrid.getStackInSlot(i) != null) {
+            tGrid |= 1 << i;
+            tGridSize++;
+        }
+        // The Number of filled Slots alone throws out almost every Recipe, which is what makes a scan over the whole
+        // Crafting Recipe List affordable.
+        if (tGridSize != mShapeSize) return F;
+        for (int tMask : mShapeMasks) if (tMask == tGrid) return T;
+        return F;
+    }
+
+    /** The Shape Rows of this Recipe, parsed the same way the inherited Constructor parses them. */
+    private static String[] shape(Object[] aRecipe) {
+        int tIndex = 0;
+        if (aRecipe.length > 0 && aRecipe[0] instanceof Boolean) {
+            if (aRecipe.length > 1 && aRecipe[1] instanceof Object[]) {
+                aRecipe = (Object[]) aRecipe[1];
+            } else {
+                tIndex = 1;
+            }
+        }
+        ArrayListNoNulls<String> rRows = new ArrayListNoNulls<>();
+        if (tIndex < aRecipe.length && aRecipe[tIndex] instanceof String[]) {
+            for (String tRow : (String[]) aRecipe[tIndex]) rRows.add(tRow);
+        } else {
+            for (; tIndex < aRecipe.length && aRecipe[tIndex] instanceof String; tIndex++)
+                rRows.add((String) aRecipe[tIndex]);
+        }
+        return rRows.toArray(ZL_STRING);
+    }
+
+    /** Every 3x3 Grid this Shape matches, or null if there is no Shape to compare against. */
+    private static int[] shapeMasks(String[] aRows) {
+        int tHeight = aRows.length, tWidth = 0;
+        for (String tRow : aRows) tWidth = Math.max(tWidth, tRow.length());
+        if (tWidth <= 0 || tHeight <= 0) return null;
+        if (tWidth > 3 || tHeight > 3) return new int[0];
+        ArrayListNoNulls<Integer> rMasks = new ArrayListNoNulls<>();
+        for (int tOffsetY = 0; tOffsetY <= 3 - tHeight; tOffsetY++)
+            for (int tOffsetX = 0; tOffsetX <= 3 - tWidth; tOffsetX++) {
+                int tNormal = 0, tMirrored = 0;
+                for (int tY = 0; tY < tHeight; tY++) for (int tX = 0; tX < tWidth; tX++) {
+                    if (tX >= aRows[tY].length() || aRows[tY].charAt(tX) == ' ') continue;
+                    tNormal |= 1 << (tOffsetX + tX + (tOffsetY + tY) * 3);
+                    tMirrored |= 1 << (tOffsetX + tWidth - tX - 1 + (tOffsetY + tY) * 3);
+                }
+                rMasks.add(tNormal);
+                rMasks.add(tMirrored);
+            }
+        int[] rArray = new int[rMasks.size()];
+        for (int i = 0; i < rArray.length; i++) rArray[i] = rMasks.get(i);
+        return rArray;
     }
 }

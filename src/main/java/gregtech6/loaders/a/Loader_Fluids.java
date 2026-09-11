@@ -463,7 +463,7 @@ public class Loader_Fluids implements Runnable {
             .setLuminosity(5);
         FL.create("blaze", "Blazing Goo", MT.Blaze, 1, 9 * L, 4000)
             .setLuminosity(15);
-        FL.create("concrete", "Wet Concrete", MT.Concrete, 1, L, 300);
+        FL.create("wetconcrete", "Wet Concrete", MT.Concrete, 1, L, 300);
         FL.create("molten.latex", "Latex", MT.Latex, 1, L, DEF_ENV_TEMP);
         FL.create("latex", "Latex", MT.Latex, 1, L, DEF_ENV_TEMP);
         FL.create("molten hsla", "Molten HSLA Steel", MT.HSLA, 1, L, 1873)

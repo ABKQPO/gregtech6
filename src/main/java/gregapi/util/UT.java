@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -4348,22 +4349,11 @@ public class UT {
         }
 
         public static Field getField(Object aObject, String aField) {
-            Field rField = null;
-            try {
-                rField = aObject.getClass()
-                    .getDeclaredField(aField);
-                rField.setAccessible(T);
-            } catch (Throwable e) {/* Do nothing */}
-            return rField;
+            return getField(aObject, aField, T, F);
         }
 
         public static Field getField(Class<?> aObject, String aField) {
-            Field rField = null;
-            try {
-                rField = aObject.getDeclaredField(aField);
-                rField.setAccessible(T);
-            } catch (Throwable e) {/* Do nothing */}
-            return rField;
+            return getField(aObject, aField, T, F);
         }
 
         public static Method getMethod(Class<?> aObject, String aMethod, Class<?>... aParameterTypes) {
@@ -4385,19 +4375,41 @@ public class UT {
             return rMethod;
         }
 
+        /**
+         * Cache of already resolved Fields, so that a Field which does not exist does not build a new Exception every
+         * single Time it gets looked up, which happens a lot in hot Code that probes for optional Fields.
+         */
+        public static final Map<String, Object> sFieldCache = new ConcurrentHashMap<>();
+        private static final Object FIELD_MISSING = new Object();
+
         public static Field getField(Object aObject, String aField, boolean aPrivate, boolean aLogErrors) {
+            Class<?> tClass;
             try {
-                Field tField = (aObject instanceof Class) ? ((Class<?>) aObject).getDeclaredField(aField)
-                    : (aObject instanceof String) ? Class.forName((String) aObject)
-                        .getDeclaredField(aField)
-                        : aObject.getClass()
-                            .getDeclaredField(aField);
-                if (aPrivate) tField.setAccessible(T);
-                return tField;
+                tClass = (aObject instanceof Class) ? (Class<?>) aObject
+                    : (aObject instanceof String) ? Class.forName((String) aObject) : aObject.getClass();
+            } catch (Throwable e) {
+                if (aLogErrors) e.printStackTrace(ERR);
+                return null;
+            }
+            String tKey = tClass.getName() + '#' + aField;
+            Object tCached = sFieldCache.get(tKey);
+            if (tCached == null) {
+                try {
+                    tCached = tClass.getDeclaredField(aField);
+                } catch (Throwable e) {
+                    if (aLogErrors) e.printStackTrace(ERR);
+                    tCached = FIELD_MISSING;
+                }
+                sFieldCache.put(tKey, tCached);
+            }
+            if (tCached == FIELD_MISSING) return null;
+            Field tField = (Field) tCached;
+            if (aPrivate && !tField.isAccessible()) try {
+                tField.setAccessible(T);
             } catch (Throwable e) {
                 if (aLogErrors) e.printStackTrace(ERR);
             }
-            return null;
+            return tField;
         }
 
         public static Object getFieldContent(Object aObject, String aField) {
@@ -4405,13 +4417,9 @@ public class UT {
         }
 
         public static Object getFieldContent(Object aObject, String aField, boolean aPrivate, boolean aLogErrors) {
+            Field tField = getField(aObject, aField, aPrivate, aLogErrors);
+            if (tField == null) return null;
             try {
-                Field tField = (aObject instanceof Class) ? ((Class<?>) aObject).getDeclaredField(aField)
-                    : (aObject instanceof String) ? Class.forName((String) aObject)
-                        .getDeclaredField(aField)
-                        : aObject.getClass()
-                            .getDeclaredField(aField);
-                if (aPrivate) tField.setAccessible(T);
                 return tField.get(aObject instanceof Class || aObject instanceof String ? null : aObject);
             } catch (Throwable e) {
                 if (aLogErrors) e.printStackTrace(ERR);
@@ -4425,13 +4433,9 @@ public class UT {
 
         public static boolean setFieldContent(Object aObject, String aField, Object aValue, boolean aPrivate,
             boolean aLogErrors) {
+            Field tField = getField(aObject, aField, aPrivate, aLogErrors);
+            if (tField == null) return F;
             try {
-                Field tField = (aObject instanceof Class) ? ((Class<?>) aObject).getDeclaredField(aField)
-                    : (aObject instanceof String) ? Class.forName((String) aObject)
-                        .getDeclaredField(aField)
-                        : aObject.getClass()
-                            .getDeclaredField(aField);
-                if (aPrivate) tField.setAccessible(T);
                 tField.set(aObject instanceof Class || aObject instanceof String ? null : aObject, aValue);
                 return T;
             } catch (Throwable e) {

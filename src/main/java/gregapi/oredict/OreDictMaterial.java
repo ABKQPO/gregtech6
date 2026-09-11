@@ -377,6 +377,28 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
         return aMaterial;
     }
 
+    /**
+     * Points an additional ID at an existing Material instead of creating a second one.
+     * <P>
+     * This exists for the ID ranges that older Versions of the Mod handed out. Item MetaData that was written with
+     * such an ID, and therefore any World Save that contains it, keeps resolving to the Material it used to be. What
+     * was registered for that ID before gets replaced, which is exactly what a legacy Alias is for.
+     *
+     * @param aID       the ID that the Material should also answer to.
+     * @param aMaterial the Material that gets registered for that ID.
+     */
+    public static OreDictMaterial addLegacyID(int aID, OreDictMaterial aMaterial) {
+        if (aMaterial == null)
+            throw new IllegalArgumentException("A legacy Material ID may not point at a null Material!");
+        if (aID < 0 || aID >= MATERIAL_ARRAY.length) throw new IllegalArgumentException(
+            "The legacy Material ID " + aID
+                + " is outside of the valid range of [0, "
+                + (MATERIAL_ARRAY.length - 1)
+                + "]!");
+        MATERIAL_ARRAY[aID] = aMaterial;
+        return aMaterial;
+    }
+
     public static String sanitize(String aString) {
         return UT.Code.capitalise(
             aString.replaceAll(" ", "")

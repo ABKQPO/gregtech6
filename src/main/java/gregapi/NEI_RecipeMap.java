@@ -30,7 +30,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidStack;
@@ -41,6 +40,7 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.ItemList;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.API;
+import codechicken.nei.event.NEIRegisterHandlerInfosEvent;
 import codechicken.nei.guihook.GuiContainerManager;
 import codechicken.nei.guihook.IContainerInputHandler;
 import codechicken.nei.guihook.IContainerTooltipHandler;
@@ -66,6 +66,17 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 
     public static final int sOffsetX = 5, sOffsetY = 11;
 
+    /**
+     * The Machine Page that every Recipe of this Handler draws as its Background, in NEI Widget Coordinates.
+     */
+    public static final int PAGE_X = -5, PAGE_Y = -16, PAGE_WIDTH = 176, PAGE_HEIGHT = 166;
+    /**
+     * The Part of the Machine Page that reaches above the Widget Origin, and the Machine Page Height that is left
+     * below it. NEI shifts this Handler down by the former and has to know the latter, otherwise it would clip the
+     * Background to a Page that is way too small.
+     */
+    public static final int PAGE_SHIFT_Y = -PAGE_Y, PAGE_INNER_HEIGHT = PAGE_HEIGHT + PAGE_Y;
+
     public NEI_RecipeMap(RecipeMap aRecipeMap) {
         mRecipeMap = aRecipeMap;
         transferRects
@@ -76,22 +87,8 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
         if (NEI_NH) {
             API.registerRecipeHandler(this);
             API.registerUsageHandler(this);
-
-            NBTTagCompound tNBT = UT.NBT.make();
-            tNBT.setString("modId", MD.GT.mID);
-            tNBT.setString("modName", MD.GT.mName);
-            tNBT.setString("handler", mRecipeMap.mNameNEI);
-            tNBT.setString(
-                "itemName",
-                ST.regMeta(
-                    mRecipeMap.mRecipeMachineList.isEmpty() ? ST.make(Blocks.lit_furnace, 1, 0)
-                        : mRecipeMap.mRecipeMachineList.get(0)));
-            tNBT.setInteger("handlerHeight", 135);
-            tNBT.setInteger("handlerWidth", 166);
-            tNBT.setInteger("maxRecipesPerPage", 2);
-            tNBT.setInteger("yShift", 6);
-            tNBT.setBoolean("modRequired", T);
-            FMLInterModComms.sendMessage("NotEnoughItems", "registerHandlerInfo", tNBT);
+            // The Handler Info of this Recipe Map gets registered by NEI_GT_API_Config while NEI reloads them, because
+            // the IMC Message for it would be processed before GT6 has its Recipe Maps ready.
         } else {
             GuiCraftingRecipe.craftinghandlers.add(this);
             GuiUsageRecipe.usagehandlers.add(this);
@@ -1430,9 +1427,39 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
     public void drawBackground(int recipe) {
         GL11.glColor4f(1, 1, 1, 1);
         GuiDraw.changeTexture(RES_PATH_GUI + "machines/NEI.png");
-        GuiDraw.drawTexturedModalRect(-5, -16, 0, 0, 176, 166);
+        GuiDraw.drawTexturedModalRect(PAGE_X, PAGE_Y, 0, 0, PAGE_WIDTH, PAGE_HEIGHT);
         GuiDraw.changeTexture(getGuiTexture());
-        GuiDraw.drawTexturedModalRect(-5, -8, 0, 3, 176, 79);
+        GuiDraw.drawTexturedModalRect(PAGE_X, PAGE_Y + 8, 0, 3, PAGE_WIDTH, 79);
+    }
+
+    /**
+     * NEI uses this as the Height of the Recipe Widget when it is larger than zero, which is what keeps the Machine
+     * Page Background inside the Page it belongs to.
+     */
+    @Override
+    public int getRecipeHeight(int recipe) {
+        return NEI_NH ? PAGE_INNER_HEIGHT : 0;
+    }
+
+    /**
+     * Tells NEI how much Room the Machine Page of this Recipe Map needs, so that NEI does not draw it into a Page of
+     * the Default Size while this Handler draws it a lot bigger than that.
+     */
+    public static void registerHandlerInfo(NEIRegisterHandlerInfosEvent aEvent, RecipeMap aRecipeMap) {
+        // Recipe Maps that GT5U or another Mod already provides a Handler Info for have to keep it, otherwise their
+        // Recipe Pages would suddenly use the Dimensions of GT6 Machine Pages, which are a lot taller than those.
+        if (GuiRecipeTab.handlerMap.containsKey(aRecipeMap.mNameNEI)) return;
+        aEvent.registerHandlerInfo(
+            new HandlerInfo.Builder(aRecipeMap.mNameNEI, MD.GT.mName, MD.GT.mID)
+                .setDisplayStack(
+                    aRecipeMap.mRecipeMachineList.isEmpty() ? ST.make(Blocks.lit_furnace, 1, 0)
+                        : aRecipeMap.mRecipeMachineList.get(0))
+                .setWidth(PAGE_WIDTH)
+                .setHeight(PAGE_INNER_HEIGHT)
+                .setShiftY(PAGE_SHIFT_Y)
+                .setMultipleWidgetsAllowed(F)
+                .setAllowOverflowY(F)
+                .build());
     }
 
     public static void drawText(int aX, int aY, String aString, int aColor) {

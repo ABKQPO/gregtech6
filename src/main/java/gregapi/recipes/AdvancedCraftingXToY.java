@@ -21,6 +21,7 @@ package gregapi.recipes;
 
 import static gregapi.data.CS.ERR;
 import static gregapi.data.CS.F;
+import static gregapi.data.CS.T;
 
 import java.util.List;
 
@@ -248,8 +249,8 @@ public class AdvancedCraftingXToY implements ICraftingRecipeGT {
     @Override
     public boolean matches(InventoryCrafting aGrid, World aWorld) {
         if (mInputCount != 9) {
-            Container tContainer = (Container) UT.Reflection.getFieldContent(aGrid, "field_70465_c", F, F);
-            if (tContainer == null) tContainer = (Container) UT.Reflection.getFieldContent(aGrid, "eventHandler", F, F);
+            Container tContainer = (Container) UT.Reflection.getFieldContent(aGrid, "field_70465_c", T, F);
+            if (tContainer == null) tContainer = (Container) UT.Reflection.getFieldContent(aGrid, "eventHandler", T, F);
             if (tContainer != null && tContainer.getClass()
                 .getName()
                 .startsWith("thaumcraft")) return F;

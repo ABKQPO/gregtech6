@@ -3511,7 +3511,7 @@ public class Recipe {
                             aOutputs[j] = NI;
                         } else {
                             aOutputs[j].stackSize -= aInputs[i].stackSize;
-                            l = Math.min(aOutputs[i].stackSize, l);
+                            l = Math.min(aOutputs[j].stackSize, l);
                         }
                     }
                 }

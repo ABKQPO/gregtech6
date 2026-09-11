@@ -50,6 +50,7 @@ import gregapi.code.IItemContainer;
 import gregapi.code.ItemStackContainer;
 import gregapi.code.TagData;
 import gregapi.compat.CompatMods;
+import gregapi.compat.gt5u.Compat_Materials_GT5U;
 import gregapi.data.*;
 import gregapi.item.multiitem.MultiItem;
 import gregapi.item.multiitem.MultiItemRandom;
@@ -253,6 +254,7 @@ public class GT6_Main extends Abstract_Mod {
             }
         };
 
+        new Compat_Materials_GT5U(MD.GT5U, this);
         new Compat_Recipes_Ganys(MD.GAPI, this);
         new Compat_Recipes_Chisel(MD.CHSL, this);
         new Compat_Recipes_FunkyLocomotion(MD.FUNK, this);

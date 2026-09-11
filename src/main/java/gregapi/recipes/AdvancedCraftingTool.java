@@ -140,6 +140,12 @@ public class AdvancedCraftingTool extends ShapelessOreRecipe implements ICraftin
 
     @Override
     public boolean matches(InventoryCrafting aGrid, World aWorld) {
+        // A Tool always needs its Head and its Handle, so a Grid that holds a different Number of Items cannot match.
+        // Anything that scans the Crafting Recipe List, most notably the Ore Processing of GregTech 5, tries this for
+        // every Recipe in it, so rejecting this early is what keeps such a scan affordable.
+        int tItems = 0;
+        for (int i = 0; i < aGrid.getSizeInventory(); i++) if (ST.valid(aGrid.getStackInSlot(i))) tItems++;
+        if (tItems != getInput().size()) return F;
         ItemStack tStack = null;
         OreDictMaterial rHead = null, rRod = null;
         for (int i = 0; i < aGrid.getSizeInventory(); i++) {

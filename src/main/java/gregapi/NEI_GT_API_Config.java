@@ -23,8 +23,9 @@ import static gregapi.data.CS.*;
 
 import java.util.Iterator;
 
+import codechicken.nei.api.API;
+import codechicken.nei.recipe.DefaultOverlayHandler;
 import codechicken.nei.recipe.GuiUsageRecipe;
-import cpw.mods.fml.common.Loader;
 import gregapi.data.MD;
 import gregapi.recipes.Recipe.RecipeMap;
 import gregapi.tileentity.tools.MultiTileEntityAdvancedCraftingTable.MultiTileEntityGUIClientAdvancedCraftingTable;
@@ -37,11 +38,7 @@ public class NEI_GT_API_Config implements codechicken.nei.api.IConfigureNEI, Run
     @Override
     public void loadConfig() {
         NEI = T;
-        NEI_NH = Loader.instance()
-            .getIndexedModList()
-            .get("NotEnoughItems")
-            .getVersion()
-            .contains("GTNH");
+        NEI_NH = NEI_GT_HandlerInfos.isGregTechHorizonsNEI();
         if (GAPI_POST.mFinishedPostInit) run();
         else GAPI_POST.mAfterPostInit.add(this);
     }
@@ -49,11 +46,7 @@ public class NEI_GT_API_Config implements codechicken.nei.api.IConfigureNEI, Run
     @Override
     public void run() {
         NEI = T;
-        NEI_NH = Loader.instance()
-            .getIndexedModList()
-            .get("NotEnoughItems")
-            .getVersion()
-            .contains("GTNH");
+        NEI_NH = NEI_GT_HandlerInfos.isGregTechHorizonsNEI();
 
         // Dont mess with NEI-NH, only mess with Vanilla NEI.
         if (!NEI_NH) {
@@ -78,11 +71,10 @@ public class NEI_GT_API_Config implements codechicken.nei.api.IConfigureNEI, Run
         for (RecipeMap tMap : RecipeMap.RECIPE_MAP_LIST) if (tMap.mNEIAllowed) new NEI_RecipeMap(tMap).init();
 
         if (CODE_CLIENT) {
-            codechicken.nei.api.API
-                .registerGuiOverlay(MultiTileEntityGUIClientAdvancedCraftingTable.class, "crafting", 55, 22);
-            codechicken.nei.api.API.registerGuiOverlayHandler(
+            API.registerGuiOverlay(MultiTileEntityGUIClientAdvancedCraftingTable.class, "crafting", 55, 22);
+            API.registerGuiOverlayHandler(
                 MultiTileEntityGUIClientAdvancedCraftingTable.class,
-                new codechicken.nei.recipe.DefaultOverlayHandler(55, 22),
+                new DefaultOverlayHandler(55, 22),
                 "crafting");
         }
     }

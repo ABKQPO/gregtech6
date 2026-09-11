@@ -2819,7 +2819,7 @@ public class CS {
         @SuppressWarnings("hiding")
         public static final String MC = "minecraft"
 
-            , GT = "gregtech6", GAPI = "gregapi", GAPI_POST = "gregapi_post"
+            , GT = "gregtech6", GT5U = "gregtech", GAPI = "gregapi", GAPI_POST = "gregapi_post"
 
             , QT = "qwertech"
 

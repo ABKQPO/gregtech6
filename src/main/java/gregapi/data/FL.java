@@ -481,7 +481,7 @@ public enum FL {
     ,
     Glue("glue", SIMPLE, LIQUID),
     Latex("latex", "molten.latex", SIMPLE, LIQUID),
-    Concrete("concrete", "molten.concrete", SIMPLE, LIQUID),
+    Concrete("wetconcrete", "concrete", "molten.concrete", SIMPLE, LIQUID),
     CFoam("ic2constructionfoam", LIQUID) // 100 per Unit
     ,
     Sewage("sewage", SIMPLE, LIQUID),

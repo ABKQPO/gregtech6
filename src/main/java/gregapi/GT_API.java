@@ -728,6 +728,8 @@ public class GT_API extends Abstract_Mod {
     @Override
     @SuppressWarnings({ "resource", "deprecation" })
     public void onModPreInit2(FMLPreInitializationEvent aEvent) {
+        NEI_GT_HandlerInfos.subscribe();
+
         FMLInterModComms.sendRuntimeMessage(MD.GT.mID, "carbonconfig", "remapGui", MD.GAPI.mID);
 
         File tFile = new File(DirectoriesGT.CONFIG_GT, "IDs.cfg");

@@ -58,6 +58,7 @@ public class AdvancedCraftingShapeless extends ShapelessOreRecipe implements ICr
 
     @Override
     public boolean matches(InventoryCrafting aGrid, World aWorld) {
+        if (countItems(aGrid) != getInput().size()) return F;
         if (mKeepingNBT) {
             ItemStack tStack = null,
                 tMainInput = ((getInput().get(0) instanceof ItemStack) ? (ItemStack) getInput().get(0) : null);
@@ -160,5 +161,16 @@ public class AdvancedCraftingShapeless extends ShapelessOreRecipe implements ICr
     @Override
     public boolean isAutocraftableByGT() {
         return mAutoCraftable;
+    }
+
+    /**
+     * Rejects a Grid that cannot possibly match this Recipe before the inherited matching tries every Ingredient
+     * against the OreDictionary Lists. Anything that scans the Crafting Recipe List, most notably the Ore Processing
+     * of GregTech 5, calls this for every Recipe in it with a Grid that holds almost nothing.
+     */
+    private static int countItems(InventoryCrafting aGrid) {
+        int rCount = 0;
+        for (int i = 0; i < aGrid.getSizeInventory(); i++) if (aGrid.getStackInSlot(i) != null) rCount++;
+        return rCount;
     }
 }
